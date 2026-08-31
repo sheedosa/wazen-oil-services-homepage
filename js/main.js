@@ -212,22 +212,11 @@
 
   renderLocList();
 
-  function initMap(retries) {
-    if (!(window.d3 && window.topojson)) {
-      if (retries > 0) return setTimeout(function () { initMap(retries - 1); }, 200);
-      return;
-    }
-    fetch('https://cdn.jsdelivr.net/npm/world-atlas@2.0.2/countries-110m.json')
-      .then(function (r) { return r.json(); })
-      .then(function (topo) {
-        var libya = topojson.feature(topo, topo.objects.countries).features.find(function (f) { return f.id === '434'; });
-        var proj = d3.geoMercator().fitExtent([[30, 30], [770, 610]], libya);
-        var path = d3.geoPath(proj)(libya);
-        var pts = LOCS.map(function (l) { return proj([l.lon, l.lat]); });
-        geo = { path: path, pts: pts };
-        renderMap();
-      })
-      .catch(function () { /* map stays list-only if the geo data can't load */ });
+  // Geometry is pre-projected at build time (see js/libya-geo.js), so the map
+  // draws immediately with no network request and no mapping library. If that
+  // file is ever missing the section degrades to the location list alone.
+  if (window.WAZEN_LIBYA && window.WAZEN_LIBYA.outline) {
+    geo = { path: window.WAZEN_LIBYA.outline, pts: window.WAZEN_LIBYA.points };
+    renderMap();
   }
-  initMap(25);
 })();
