@@ -23,7 +23,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # enablement lets this run turn Pages on (source: GitHub Actions)
+      # via the API, so the site needs no manual Settings step.
       - uses: actions/configure-pages@v5
+        with:
+          enablement: true
 
       # The site is already a plain static build at the repo root.
       - uses: actions/upload-pages-artifact@v3
