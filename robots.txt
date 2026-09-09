@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 
 # Placeholder pages carry their own noindex; listed here for clarity only.
-Sitemap: https://sheedosa.github.io/wazen-oil-services-homepage/sitemap.xml
+Sitemap: https://wazen.ly/sitemap.xml

@@ -4,7 +4,7 @@ Production build of the Wazen Oil Services homepage, implemented from a
 Claude Design handoff (brand brief + iterative design chat) as a static,
 dependency-free HTML/CSS/JS site suitable for GitHub Pages.
 
-**Live demo:** https://sheedosa.github.io/wazen-oil-services-homepage/
+**Live demo:** https://wazen.ly/
 
 Deployed automatically from `main` by
 [`.github/workflows/pages.yml`](.github/workflows/pages.yml). One-time setup:
