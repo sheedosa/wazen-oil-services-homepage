@@ -243,27 +243,31 @@
 </section>
 
 <section id="footprint" class="section section-fade-up">
-  <div class="wrap">
-    <div class="section-head footprint-head" data-reveal>
+  <!-- Two columns, matching the layout table in the edits doc: copy and the
+       selection description on the left, the filter choices and map on the
+       right. Side by side rather than stacked also halves the section height. -->
+  <div class="wrap footprint-grid">
+    <div class="footprint-copy" data-reveal>
       <div class="eyebrow">Our Footprint</div>
       <h2>Nonstop Operations<br>Across Libya Since 2007</h2>
       <div class="rule"></div>
+      <p class="lede">From Tripoli and Benghazi to field locations across Libya's major producing regions, Wazen's established infrastructure supports the mobilisation of people, equipment and technical resources where they are needed.</p>
+      <div class="map-detail" data-map-detail></div>
     </div>
 
-    <div class="map-filters" role="group" aria-label="Filter locations by type" data-map-filters data-reveal></div>
-
-    <p class="lede footprint-lede" data-reveal>From Tripoli and Benghazi to field locations across Libya's major producing regions, Wazen's established infrastructure supports the mobilisation of people, equipment and technical resources where they are needed.</p>
-
-    <div class="map-stack" data-reveal>
+    <div class="footprint-map" data-reveal>
+      <div class="map-filters" role="group" aria-label="Filter locations by type" data-map-filters></div>
       <div class="map-panel" data-map-panel></div>
-      <div class="map-detail" data-map-detail></div>
     </div>
   </div>
 </section>
 
 <section id="careers" class="people">
-  <!-- Photo field sits behind the copy card; every tile is decorative. -->
-  <div class="people-mosaic" aria-hidden="true">
+  <!-- The copy card is a member of the photo grid rather than an overlay: the
+       old version sized the reserved gap against the full-bleed mosaic and the
+       card against the padded .wrap, so they never lined up and the section
+       background showed through beside it. Every tile is decorative. -->
+  <div class="people-mosaic">
     <div class="pm-row pm-top">
       <img class="pm-t" src="assets/careers/wide-1.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async" data-strip width="600" height="299">
       <img class="pm-t" src="assets/careers/sq-01.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async" data-strip width="300" height="300">
@@ -287,7 +291,13 @@
       <img class="pm-t" src="assets/careers/sq-11.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async" data-strip width="300" height="300">
       <img class="pm-t" src="assets/careers/sq-12.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async" width="300" height="300">
       </div>
-      <div class="pm-copyspace"></div>
+      <div class="people-card" data-reveal>
+        <div class="eyebrow">Our People &amp; Local Capability</div>
+        <h2>Building the Future of Libya's Energy Workforce</h2>
+        <div class="rule"></div>
+        <p>With a direct workforce of over 250 personnel, Wazen is deeply committed to local capacity building. Through HSE training programs, continuous professional development, and our Engineering Internship initiative, we work to empower local Libyan talent to build rewarding careers and execute alongside global leaders in the energy sector.</p>
+        <a href="mailto:SPM@Wazen.ly" class="btn btn-primary">Explore Career Opportunities</a>
+    </div>
       <div class="pm-col pm-right">
       <img class="pm-t" src="assets/careers/tall-1.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async" width="299" height="600">
       <img class="pm-t" src="assets/careers/sq-13.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async" width="300" height="300">
@@ -312,15 +322,6 @@
     </div>
   </div>
 
-  <div class="wrap people-wrap">
-    <div class="people-card" data-reveal>
-      <div class="eyebrow">Our People &amp; Local Capability</div>
-      <h2>Building the Future of Libya's Energy Workforce</h2>
-      <div class="rule"></div>
-      <p>With a direct workforce of over 250 personnel, Wazen is deeply committed to local capacity building. Through HSE training programs, continuous professional development, and our Engineering Internship initiative, we work to empower local Libyan talent to build rewarding careers and execute alongside global leaders in the energy sector.</p>
-      <a href="mailto:SPM@Wazen.ly" class="btn btn-primary">Explore Career Opportunities</a>
-    </div>
-  </div>
 </section>
 
 <section class="clients">

@@ -223,7 +223,7 @@
 
     mapPanel.innerHTML = [
       '<svg viewBox="0 0 800 640" aria-hidden="true">',
-      '<path d="' + geo.path + '" fill="#e8edee" stroke="#c9d2d5" stroke-width="1.5" stroke-linejoin="round"></path>',
+      '<path d="' + geo.path + '" fill="#dbe3e6" stroke="#b6c2c6" stroke-width="1.5" stroke-linejoin="round"></path>',
       links.map(function (d) {
         return '<path d="' + d + '" fill="none" stroke="#f26522" stroke-width="1.5" stroke-dasharray="3 8" stroke-linecap="round" opacity="0.45" style="animation:' + (reduceMotion ? 'none' : 'wzDash 1.6s linear infinite') + '"></path>';
       }).join(''),
