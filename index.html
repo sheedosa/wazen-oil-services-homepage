@@ -4,41 +4,41 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Wazen Oil Services — The Strategic Gateway to Libya's Energy Sector</title>
-<meta name="description" content="Wazen Oil Services is a Libyan-owned oilfield services company delivering full-scope field solutions — engineering, operations, automation, supply chain, infrastructure and workforce — for international energy companies operating in Libya since 2007.">
+<meta name="description" content="Wazen Oil Services is a Libyan-owned oilfield services company delivering full-scope field solutions — engineering, construction, operations, automation, supply chain and workforce — for international energy companies operating in Libya since 2007.">
 <link rel="icon" href="data:,">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Source+Sans+3:wght@400;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Sans+3:wght@400;600&display=swap">
 <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
 
 <nav class="nav" data-nav>
-  <a href="#top" class="nav-brand">
-    <img src="assets/wazen-logo-dark-bg.svg" alt="Wazen Oil Services">
-  </a>
+  <button class="nav-burger" data-nav-burger aria-label="Menu" aria-expanded="false" aria-controls="mobile-menu">
+    <span></span><span></span><span></span>
+  </button>
   <div class="nav-links">
     <a href="#top" class="current">Home</a>
     <a href="#company">Company</a>
     <a href="#capabilities">Capabilities</a>
-    <a href="#partnerships">Global Partnerships</a>
-    <a href="#track-record">Track Record</a>
+    <a href="#partnerships" data-tab-link="2">Global Partnerships</a>
+    <a href="#track-record" data-tab-link="1">Track Record</a>
     <a href="#careers">Careers</a>
-    <a href="#contact" class="btn btn-primary">Contact</a>
+    <a href="#contact">Contact</a>
   </div>
-  <button class="nav-burger" data-nav-burger aria-label="Menu" aria-expanded="false" aria-controls="mobile-menu">
-    <span></span><span></span><span></span>
-  </button>
+  <a href="#top" class="nav-brand">
+    <img src="assets/wazen-logo-dark-bg.svg" alt="Wazen Oil Services">
+  </a>
 </nav>
 
 <div class="mobile-menu" id="mobile-menu" data-mobile-menu>
   <a href="#top" class="current">Home</a>
   <a href="#company">Company</a>
   <a href="#capabilities">Capabilities</a>
-  <a href="#partnerships">Global Partnerships</a>
-  <a href="#track-record">Track Record</a>
+  <a href="#partnerships" data-tab-link="2">Global Partnerships</a>
+  <a href="#track-record" data-tab-link="1">Track Record</a>
   <a href="#careers">Careers</a>
-  <a href="#contact" class="btn btn-primary">Contact</a>
+  <a href="#contact">Contact</a>
 </div>
 
 <header id="top" class="hero">
@@ -48,22 +48,36 @@
   <div class="hero-scrim-h"></div>
   <div class="hero-inner">
     <h1>The Strategic Gateway to <span>Libya's Energy Sector</span></h1>
-    <p>From market entry to project delivery, Wazen provides the critical infrastructure, local capability, and operational expertise international energy companies need to execute at scale in Libya.</p>
+    <p>From market entry to project delivery, Wazen provides the local infrastructure, technical capability and operational expertise international energy companies need to execute successfully in Libya.</p>
     <div class="hero-ctas">
-      <a href="#contact" class="btn btn-primary">Discuss Your Libya Opportunity</a>
+      <a href="mailto:SPM@Wazen.ly" class="btn btn-primary">Discuss Your Libya Opportunity</a>
       <a href="#capabilities" class="btn btn-ghost-dark">Our Capabilities &rsaquo;</a>
     </div>
   </div>
-</header>
 
-<section id="company" class="trust">
-  <div class="wrap trust-grid">
-    <div class="trust-item"><div class="num">Established 2007</div><div class="label">Libyan-Owned</div></div>
-    <div class="trust-item"><div class="num"><span data-count="250">0</span>+</div><div class="label">Direct Workforce</div></div>
-    <div class="trust-item"><div class="num">Active Field Operations</div><div class="label">Nationwide</div></div>
-    <div class="trust-item"><div class="num">ISO 9001 &bull; 14001 &bull; 45001</div><div class="label">Certified Management Systems</div></div>
+  <!-- Trust bar is overlaid on the hero video rather than sitting in its own
+       band below it, so the stats read as part of the opening frame. -->
+  <div class="hero-trust">
+    <div class="wrap trust-grid">
+      <div class="trust-item">
+        <div class="num">EST. 2007</div>
+        <div class="label">Nearly Two Decades of Delivery</div>
+      </div>
+      <div class="trust-item">
+        <div class="num">X+ Million</div>
+        <div class="label">LTI-Free Work Hours</div>
+      </div>
+      <div class="trust-item">
+        <div class="num">Nationwide Infrastructure</div>
+        <div class="label">Operational Camps Across Libya</div>
+      </div>
+      <div class="trust-item">
+        <div class="num">ISO Certified</div>
+        <div class="label">9001 &middot; 14001 &middot; 45001</div>
+      </div>
+    </div>
   </div>
-</section>
+</header>
 
 <section id="capabilities" class="section section-fade-down">
   <div class="wrap">
@@ -77,113 +91,133 @@
       <div class="cap-card">
         <svg width="34" height="34" viewBox="0 0 34 34" fill="none" stroke-width="2" aria-hidden="true"><path d="M6 28V14l11-8 11 8v14"></path><path d="M13 28v-8h8v8"></path></svg>
         <h3>Engineering &amp; Project Delivery</h3>
-        <p>Managing complex project lifecycles from initial design through to final commissioning</p>
+        <p>From surveys and multidisciplinary engineering through planning, procurement, construction management, commissioning support and handover.</p>
+      </div>
+      <div class="cap-card">
+        <svg width="34" height="34" viewBox="0 0 34 34" fill="none" stroke-width="2" aria-hidden="true"><path d="M5 28h24M8 28V13l9-6 9 6v15"></path><path d="M13 28v-6h8v6M13 17h8"></path></svg>
+        <h3>Construction &amp; Field Services</h3>
+        <p>Civil, mechanical, piping, pipeline, tank, electrical and instrumentation works delivered across Libya's operating environments.</p>
       </div>
       <div class="cap-card">
         <svg width="34" height="34" viewBox="0 0 34 34" fill="none" stroke-width="2" aria-hidden="true"><circle cx="17" cy="17" r="6"></circle><path d="M17 4v5M17 25v5M4 17h5M25 17h5M8 8l3.5 3.5M22.5 22.5L26 26M26 8l-3.5 3.5M11.5 22.5L8 26"></path></svg>
         <h3>Operations &amp; Maintenance</h3>
-        <p>Ensuring asset integrity, maximizing uptime, and sustaining production across diverse environments.</p>
+        <p>Field maintenance, rehabilitation, shutdown support and asset integrity services for production, processing and storage facilities.</p>
       </div>
       <div class="cap-card">
         <svg width="34" height="34" viewBox="0 0 34 34" fill="none" stroke-width="2" aria-hidden="true"><rect x="5" y="6" width="24" height="17" rx="2"></rect><path d="M10 17l4-5 4 3 5-7"></path><path d="M13 29h8"></path></svg>
         <h3>Measurement &amp; Automation</h3>
-        <p>Integrating state-of-the-art digital measurement and control systems into local operations.</p>
+        <p>Fiscal and process metering, instrumentation, control systems, automation and digital field solutions.</p>
       </div>
       <div class="cap-card">
         <svg width="34" height="34" viewBox="0 0 34 34" fill="none" stroke-width="2" aria-hidden="true"><path d="M4 24h16v-9H4zM20 18h6l4 4v2h-10"></path><circle cx="9" cy="27" r="2.5"></circle><circle cx="25" cy="27" r="2.5"></circle></svg>
         <h3>Supply Chain &amp; Procurement</h3>
-        <p>Handling the local logistics across Libya to deliver critical materials and equipment on time.</p>
-      </div>
-      <div class="cap-card">
-        <svg width="34" height="34" viewBox="0 0 34 34" fill="none" stroke-width="2" aria-hidden="true"><path d="M5 28h24M8 28V13l9-6 9 6v15"></path><path d="M13 28v-6h8v6M13 17h8"></path></svg>
-        <h3>Field Infrastructure &amp; Mobility</h3>
-        <p>Establishing and operating secure, fully equipped remote camps to support deployed teams.</p>
+        <p>Technical procurement, materials sourcing, logistics and project supply support for operations across Libya.</p>
       </div>
       <div class="cap-card">
         <svg width="34" height="34" viewBox="0 0 34 34" fill="none" stroke-width="2" aria-hidden="true"><circle cx="12" cy="11" r="4.5"></circle><path d="M4 27c0-4.4 3.6-8 8-8s8 3.6 8 8"></path><circle cx="24" cy="12" r="3.5"></circle><path d="M23 19.5c3.9.5 7 3.7 7 7.5"></path></svg>
         <h3>Workforce &amp; Technical Solutions</h3>
-        <p>Deploying highly trained, safety-certified local engineering and technical personnel</p>
+        <p>Qualified engineers, specialists and field personnel supported by local mobilisation, logistics and workforce administration.</p>
       </div>
     </div>
   </div>
 </section>
 
-<section id="track-record" class="section section-tight-top" style="background:#fff">
+<section id="company" class="section section-tight-top" style="background:#fff">
   <div class="wrap">
-    <div id="partnerships" class="tabbar-wrap" data-reveal>
+    <!-- Bare anchors so the nav's deep links still land here without JS; the
+         script upgrades them to also select the matching tab. -->
+    <span id="track-record" class="anchor-offset"></span>
+    <span id="partnerships" class="anchor-offset"></span>
+
+    <div class="tabbar-wrap" data-reveal>
       <div class="tabbar" role="tablist" aria-label="Wazen at a glance" data-tabbar>
         <button role="tab" type="button" class="is-active" data-tab="0" aria-selected="true">Strategic Foundations</button>
-        <button role="tab" type="button" data-tab="1" aria-selected="false">Track Record</button>
+        <button role="tab" type="button" data-tab="1" aria-selected="false">Proven in the Field</button>
         <button role="tab" type="button" data-tab="2" aria-selected="false">International Partnerships</button>
       </div>
     </div>
 
     <div class="tab-panels">
       <div class="tab-panel is-active" data-panel="0">
+        <div class="tab-intro">
+          <h3>Built for Libya. Ready to Deliver.</h3>
+          <p>Successful delivery in Libya requires more than technical capability. Wazen combines local knowledge, established infrastructure and on-the-ground execution capability to deliver where it matters.</p>
+        </div>
         <div class="grid-3">
           <div class="tab-card flush">
             <div class="num">01 &rsaquo;</div>
             <h3>Local Knowledge</h3>
-            <p>Deeply rooted understanding of Libya's energy sector. We seamlessly navigate local regulatory frameworks, stakeholder relations, and the operational nuances required to execute safely.</p>
+            <p>Nearly two decades operating in Libya's energy sector — regulatory processes, stakeholder relationships, and the practical realities of mobilising and delivering projects on the ground.</p>
             <a href="#footprint" class="link">Our Local Advantage &rsaquo;</a>
           </div>
           <div class="tab-card flush">
             <div class="num">02 &rsaquo;</div>
             <h3>Infrastructure</h3>
-            <p>An expansive, ready-to-deploy logistical network. Our established headquarters, regional branches, and fully equipped remote camps provide the physical foundation for nationwide operations.</p>
+            <p>Headquarters in Tripoli, an office in Benghazi, and an established network of operational field camps across Eastern, Western and Southern Libya. Fully staffed and ready to support field operations.</p>
             <a href="#footprint" class="link">Our Footprint &rsaquo;</a>
           </div>
           <div class="tab-card flush">
             <div class="num">03 &rsaquo;</div>
             <h3>Execution</h3>
-            <p>End-to-end delivery capability built on rigorous international standards. We provide the engineering, construction, and technology integration required to turn complex project plans into reality.</p>
+            <p>Multidisciplinary engineering and field teams with experience delivering projects across Libya's NOC operating companies and some of the country's most demanding operating environments.</p>
             <a href="#capabilities" class="link">Our Capabilities &rsaquo;</a>
           </div>
         </div>
       </div>
 
       <div class="tab-panel" data-panel="1">
+        <div class="tab-intro">
+          <h3>Proven Across the Project Lifecycle.</h3>
+          <p>From major infrastructure and long-term field operations to the integration of international technologies, Wazen's track record demonstrates capability across the project and asset lifecycle.</p>
+        </div>
         <div class="grid-3">
           <div class="tab-card">
-            <h3>Production Infrastructure Management</h3>
-            <div class="meta">Client: Akakus Oil Operations &middot; Location: Shararah Oilfield</div>
-            <p>Executing long-term rehabilitation and construction, including critical flowlines, trunklines, well tie-ins, and tank rehabilitation to sustain national production.</p>
-            <a href="#contact" class="link">Read the Case Study &rsaquo;</a>
+            <div class="kicker">Build</div>
+            <h3>Major Energy Infrastructure</h3>
+            <p>Engineering and field execution of critical energy infrastructure, including major storage tanks, pipelines, flowlines and multidisciplinary production facilities.</p>
+            <a href="#contact" class="feature-link">500,000 BBL Harouge Tank Project &rsaquo;</a>
+            <a href="#contact" class="link">Explore Build Projects &rsaquo;</a>
           </div>
           <div class="tab-card">
-            <h3>Automation Technology Integration</h3>
-            <div class="meta">Client: Mellitah (In Partnership with Sensia) &middot; Location: El Feel Oilfield</div>
-            <p>Bridging OEM innovation with local execution. Wazen teams led the on-the-ground installation of proprietary digital measurement systems under remote international guidance.</p>
-            <a href="#contact" class="link">Read the Case Study &rsaquo;</a>
+            <div class="kicker">Integrate</div>
+            <h3>Measurement &amp; Automation &middot; Technology</h3>
+            <p>Integrating international measurement, automation and control technologies through local engineering, installation and field execution.</p>
+            <a href="#contact" class="feature-link">Mellitah &middot; Integrated Metering Systems &rsaquo;</a>
+            <a href="#contact" class="link">Explore Integration Projects &rsaquo;</a>
           </div>
           <div class="tab-card">
-            <h3>Multi-Year General Maintenance</h3>
-            <div class="meta">Client: Sarir Oil Operations (Wintershall Dea) &middot; Location: Sirte Basin</div>
-            <p>Providing comprehensive, continuous maintenance support across multiple onshore concessions, ensuring uninterrupted operations in highly demanding environments.</p>
-            <a href="#contact" class="link">Read the Case Study &rsaquo;</a>
+            <div class="kicker">Operate</div>
+            <h3>Operations &amp; Production Support &middot; Shararah</h3>
+            <p>Long-term field support combining maintenance, rehabilitation and production-infrastructure works to support safe, reliable operations.</p>
+            <a href="#contact" class="feature-link">Ongoing Field Presence &rsaquo;</a>
+            <a href="#contact" class="link">Explore Operations &rsaquo;</a>
           </div>
         </div>
       </div>
 
       <div class="tab-panel" data-panel="2">
+        <div class="tab-intro">
+          <h3>International Capability. Libyan Execution.</h3>
+          <p>Wazen works with international technology, engineering and service companies to provide the local infrastructure, technical capability and field execution needed to operate successfully in Libya.</p>
+        </div>
         <div class="grid-3">
           <div class="tab-card">
-            <div class="logo-chip">SENSIA<span>&middot; logo pending</span></div>
-            <h3>Sensia Global</h3>
-            <p>As the trusted in-country partner, Wazen represented Sensia in the Libyan market, providing the on-the-ground execution and deploying a fully trained in-house team to integrate complex digital systems alongside their technical support.</p>
-            <a href="#contact" class="link">View Partnership Model &rsaquo;</a>
+            <h3>Market Entry &amp; Local Support</h3>
+            <div class="meta">Local establishment and operational support</div>
+            <p>Equipping clients and partners with the local infrastructure and mobilisation capabilities needed to operate in Libya on day one, eliminating the time and risk of building from the ground up.</p>
+            <a href="#contact" class="link">Learn More &rsaquo;</a>
           </div>
           <div class="tab-card">
-            <div class="logo-chip">SWAGELOK<span>&middot; logo pending</span></div>
-            <h3>Swagelok</h3>
-            <p>Providing long-term stability and a trusted partner on the ground for international manufacturers. Wazen has acted as the local representative for over 15 years, delivering on-the-ground support and product presence.</p>
-            <a href="#contact" class="link">View Distribution Network &rsaquo;</a>
+            <h3>Technology Integration</h3>
+            <div class="meta">International technology. Local execution.</div>
+            <p>Providing the local engineering, installation, commissioning support and after-sales capability required to deploy international technologies in Libyan operating environments.</p>
+            <a href="#contact" class="link">Learn More &rsaquo;</a>
           </div>
           <div class="tab-card">
-            <div class="logo-chip">KENT<span>&middot; logo pending</span></div>
-            <h3>Kent PLC</h3>
-            <p>Creating a synergy between global design and local delivery. Our alliance pairs Kent's world-class international engineering capabilities with Wazen's proven local execution and workforce.</p>
-            <a href="#contact" class="link">Read the Case Study &rsaquo;</a>
+            <h3>Delivery Partnerships</h3>
+            <div class="meta">Combining international expertise with local capability</div>
+            <p>Working alongside international engineering and service companies to execute projects through Wazen's local teams, infrastructure and field-delivery platform.</p>
+            <a href="#contact" class="link">Learn More &rsaquo;</a>
           </div>
         </div>
       </div>
@@ -193,15 +227,19 @@
 
 <section id="footprint" class="section section-fade-up">
   <div class="wrap">
-    <div class="section-head" style="max-width:820px" data-reveal>
+    <div class="section-head footprint-head" data-reveal>
       <div class="eyebrow">Our Footprint</div>
-      <h2>Nationwide Operational Capabilities</h2>
+      <h2>Nonstop Operations<br>Across Libya Since 2007</h2>
       <div class="rule"></div>
-      <p class="lede" style="font-size:17px">With headquarters in Tripoli, a branch office in Benghazi, and established remote camps across Eastern, Western, and Southern Libya, Wazen offers the geographical reach and logistical support to execute large-scale operations safely and efficiently anywhere in the country.</p>
     </div>
-    <div class="map-grid" data-reveal>
-      <div class="loc-list" data-loc-list></div>
+
+    <div class="map-filters" role="tablist" aria-label="Location type" data-map-filters data-reveal></div>
+
+    <p class="lede footprint-lede" data-reveal>From Tripoli and Benghazi to field locations across Libya's major producing regions, Wazen's established infrastructure supports the mobilisation of people, equipment and technical resources where they are needed.</p>
+
+    <div class="map-stack" data-reveal>
       <div class="map-panel" data-map-panel></div>
+      <div class="map-detail" data-map-detail></div>
     </div>
   </div>
 </section>
@@ -217,7 +255,7 @@
       <h2>Building the Future of Libya's Energy Workforce</h2>
       <div class="rule"></div>
       <p>With a direct workforce of over 250 personnel, Wazen is deeply committed to local capacity building. Through HSE training programs, continuous professional development, and our Engineering Internship initiative, we work to empower local Libyan talent to build rewarding careers and execute alongside global leaders in the energy sector.</p>
-      <a href="#contact" class="btn btn-primary">Explore Career Opportunities</a>
+      <a href="mailto:SPM@Wazen.ly" class="btn btn-primary">Explore Career Opportunities</a>
     </div>
   </div>
 </section>
@@ -267,7 +305,7 @@
       <h2>Ready to enter, operate, or scale in <span>Libya?</span></h2>
       <p class="cta-lede">Partner with the local enabler that understands and meets your exact operational requirements and international standards.</p>
       <div class="cta-ctas">
-        <a href="mailto:info@wazen.ly" class="btn btn-primary">Discuss Your Libya Opportunity</a>
+        <a href="mailto:SPM@Wazen.ly" class="btn btn-primary">Discuss Your Libya Opportunity</a>
         <a href="#capabilities" class="btn btn-ghost-dark2">Our Capabilities &rsaquo;</a>
       </div>
       <div class="cta-quote">&ldquo;We deliver global standards with Libyan strength.&rdquo;</div>
@@ -277,7 +315,7 @@
       <div class="cta-card-rows">
         <div class="cta-card-row">
           <span class="chev">&rsaquo;</span>
-          <div><div class="k">Email</div><a href="mailto:info@wazen.ly">info@wazen.ly</a></div>
+          <div><div class="k">Email</div><a href="mailto:SPM@Wazen.ly">SPM@Wazen.ly</a></div>
         </div>
         <div class="cta-card-row">
           <span class="chev">&rsaquo;</span>
@@ -306,7 +344,7 @@
         <a href="#company">Company Overview</a>
         <a href="#contact">Contact Us</a>
         <a href="#capabilities">HSE &amp; Quality</a>
-        <a href="#track-record">News &amp; Insights</a>
+        <a href="#track-record" data-tab-link="1">News &amp; Insights</a>
         <a href="#careers">Careers</a>
         <a href="#footprint">Locations</a>
         <a href="#company">Company Profile</a>
@@ -335,6 +373,7 @@
       <a href="#top">Code of Conduct</a>
       <a href="#top">Safety &amp; Sustainability Policy</a>
       <a href="#top">Quality Policy</a>
+      <a href="#top">Anti-Bribery &amp; Corruption</a>
       <a href="#top">Modern Slavery Statement</a>
     </div>
     <div>Copyright &copy; 2026 Wazen Oil Services. All rights reserved.</div>

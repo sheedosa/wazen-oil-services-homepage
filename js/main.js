@@ -57,28 +57,6 @@
     });
   }
 
-  /* ---------- Animated counters ---------- */
-  var counters = document.querySelectorAll('[data-count]');
-  if (counters.length) {
-    var counterIO = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (!entry.isIntersecting || entry.target._done) return;
-        entry.target._done = true;
-        var target = +entry.target.getAttribute('data-count');
-        if (reduceMotion) { entry.target.textContent = target; return; }
-        var t0 = performance.now(), dur = 1400;
-        function tick(t) {
-          var p = Math.min(1, (t - t0) / dur);
-          var eased = 1 - Math.pow(1 - p, 3);
-          entry.target.textContent = Math.round(target * eased);
-          if (p < 1) requestAnimationFrame(tick);
-        }
-        requestAnimationFrame(tick);
-      });
-    }, { threshold: 0.4 });
-    counters.forEach(function (c) { counterIO.observe(c); });
-  }
-
   /* ---------- Scroll reveal ---------- */
   if (!reduceMotion) {
     var revealIO = new IntersectionObserver(function (entries) {
@@ -116,6 +94,14 @@
     tabButtons.forEach(function (btn, idx) {
       btn.addEventListener('click', function () { selectTab(idx); });
     });
+    // "Track Record" / "Global Partnerships" links elsewhere on the page
+    // select the matching tab as well as scrolling here.
+    document.querySelectorAll('[data-tab-link]').forEach(function (link) {
+      link.addEventListener('click', function () {
+        selectTab(+link.getAttribute('data-tab-link'));
+      });
+    });
+
     tabbar.addEventListener('keydown', function (e) {
       var idx = tabButtons.findIndex(function (b) { return b.classList.contains('is-active'); });
       if (e.key === 'ArrowRight') { selectTab((idx + 1) % tabButtons.length); tabButtons[(idx + 1) % tabButtons.length].focus(); }
@@ -123,98 +109,132 @@
     });
   }
 
-  /* ---------- Footprint: locations list + map ---------- */
-  var LOCS = [
-    { name: 'Wazen HQ — Tripoli / Zawiya', lat: 32.88, lon: 13.19, d: 'Headquarters on Ibne Batuta St., Siyahiya, Tripoli — corporate leadership, engineering, procurement and project management for nationwide operations.' },
-    { name: 'Benghazi Office', lat: 32.12, lon: 20.07, d: 'Regional branch serving Eastern Libya — client liaison, logistics coordination and rapid mobilization for the Sirte Basin and eastern concessions.' },
-    { name: 'Shararah Camp', lat: 26.6, lon: 12.1, d: 'Fully equipped remote camp at the Shararah Oilfield supporting long-term rehabilitation and construction operations in the southwest.' },
-    { name: 'Dahra Camp', lat: 29.5, lon: 17.8, d: 'Field camp at the Dahra Oilfield sustaining maintenance and production-support crews in central Libya.' },
-    { name: 'Ras Lanuf Camp', lat: 30.5, lon: 18.53, d: 'Coastal camp serving the Ras Lanuf Refinery — turnaround support, fabrication and marine-adjacent logistics.' },
-    { name: 'Gialo 59 Camp', lat: 28.7, lon: 21.5, d: 'Remote camp at the Gialo Oilfield housing deployed technical teams for the eastern producing fields.' },
-    { name: 'Nafoora Camp', lat: 29.25, lon: 21.35, d: 'Camp at the Nafoora Oilfield supporting continuous operations and maintenance crews.' },
-    { name: 'Srir / Messla Camp', lat: 27.65, lon: 22.42, d: 'Southeastern camp serving the Srir Refinery and Messla field — deep-desert logistics and multi-year maintenance support.' },
-    { name: 'Marsa Camp', lat: 32.07, lon: 24.0, d: 'Camp at Marsa el-Harige near Tobruk — export-terminal support at Libya’s eastern gateway.' }
+  /* ---------- Footprint: category filter + map ---------- */
+  /* Order must match the baked points array in js/libya-geo.js. */
+  var SITES = [
+    { cat: 'hq',   name: 'Tripoli',          d: 'Headquarters on Ibne Batuta St., Siyahiya, Tripoli — corporate leadership, engineering, procurement and project management for nationwide operations.' },
+    { cat: 'hq',   name: 'Benghazi',         d: 'Regional branch office serving Eastern Libya — client liaison, logistics coordination and rapid mobilisation for the Sirte Basin and eastern concessions.' },
+    { cat: 'camp', name: 'Shararah Camp',    d: 'Fully equipped operational camp at the Shararah Oilfield supporting long-term rehabilitation and construction works in the southwest.' },
+    { cat: 'camp', name: 'Gialo Camp',       d: 'Remote camp at the Gialo Oilfield housing deployed technical teams serving the eastern producing fields.' },
+    { cat: 'camp', name: 'Srir-Msella Camp', d: 'Southeastern camp serving the Srir and Messla fields — deep-desert logistics and multi-year maintenance support.' },
+    { cat: 'site', name: 'Mellitah',         d: 'Measurement and automation works at the Mellitah complex, including the integration of international metering systems through local execution.' },
+    { cat: 'site', name: 'Tobruk',           d: 'Export-terminal support at Marsa el-Harige near Tobruk, at Libya\u2019s eastern gateway.' },
+    { cat: 'site', name: 'Dahra',            d: 'Maintenance and production-support works at the Dahra Oilfield in central Libya.' },
+    { cat: 'site', name: 'Ras Lanuf',        d: 'Works at the Ras Lanuf refinery and petrochemical complex — turnaround support, fabrication and coastal logistics.' },
+    { cat: 'site', name: 'Nafoora',          d: 'Operations and maintenance support at the Nafoora Oilfield in the eastern Sirte Basin.' },
+    { cat: 'site', name: 'Zelten',           d: 'Field works at the Zelten (Nasser) Oilfield, one of the Sirte Basin\u2019s long-established producing areas.' }
   ];
 
-  var locList = document.querySelector('[data-loc-list]');
-  var mapPanel = document.querySelector('[data-map-panel]');
-  var activeLoc = 0;
-  var geo = null; // { path, pts: [[x,y], ...] }
+  var CATS = [
+    { key: 'hq',   label: 'Headquarters & Branches' },
+    { key: 'camp', label: 'Operational Camps' },
+    { key: 'site', label: 'Project Sites' }
+  ];
 
-  function renderLocList() {
-    if (!locList) return;
-    locList.innerHTML = '';
-    LOCS.forEach(function (loc, i) {
-      var row = document.createElement('div');
-      row.className = 'loc-row' + (i === activeLoc ? ' is-active' : '');
+  var filterBar = document.querySelector('[data-map-filters]');
+  var mapPanel = document.querySelector('[data-map-panel]');
+  var mapDetail = document.querySelector('[data-map-detail]');
+  var activeCat = 'hq';
+  var activeSite = 0;
+  var geo = null; // { path, pts: [[x,y], ...] } — indexes align with SITES
+
+  function catLabel(key) {
+    for (var i = 0; i < CATS.length; i++) if (CATS[i].key === key) return CATS[i].label;
+    return '';
+  }
+
+  function indexesFor(cat) {
+    var out = [];
+    SITES.forEach(function (site, i) { if (site.cat === cat) out.push(i); });
+    return out;
+  }
+
+  function renderFilters() {
+    if (!filterBar) return;
+    filterBar.innerHTML = '';
+    CATS.forEach(function (cat) {
       var btn = document.createElement('button');
       btn.type = 'button';
-      btn.setAttribute('aria-expanded', i === activeLoc ? 'true' : 'false');
-      btn.innerHTML =
-        '<span class="idx">' + String(i + 1).padStart(2, '0') + '</span>' +
-        '<span class="name">' + loc.name + '</span>' +
-        '<span class="chev">&rsaquo;</span>';
-      btn.addEventListener('click', function () { setActiveLoc(i); });
-      row.appendChild(btn);
-      if (i === activeLoc) {
-        var p = document.createElement('p');
-        p.className = 'desc';
-        p.textContent = loc.d;
-        row.appendChild(p);
-      }
-      locList.appendChild(row);
+      btn.setAttribute('role', 'tab');
+      var on = cat.key === activeCat;
+      btn.className = on ? 'is-active' : '';
+      btn.setAttribute('aria-selected', on ? 'true' : 'false');
+      btn.innerHTML = cat.label + '<span class="n">' + indexesFor(cat.key).length + '</span>';
+      btn.addEventListener('click', function () { setActiveCat(cat.key); });
+      filterBar.appendChild(btn);
     });
+  }
+
+  function renderDetail() {
+    if (!mapDetail) return;
+    var site = SITES[activeSite];
+    mapDetail.innerHTML =
+      '<div class="cat">' + catLabel(site.cat) + '</div>' +
+      '<h3>' + site.name + '</h3>' +
+      '<p></p>';
+    mapDetail.querySelector('p').textContent = site.d;
   }
 
   function renderMap() {
     if (!mapPanel) return;
     if (!geo) { mapPanel.innerHTML = ''; return; }
+
+    var shown = indexesFor(activeCat);
     var pins = geo.pts;
-    var links = pins.slice(1).map(function (pt) {
-      var x0 = pins[0][0], y0 = pins[0][1], x1 = pt[0], y1 = pt[1];
+
+    // Dashed arcs run from Tripoli (the HQ, index 0) out to each shown site.
+    var links = shown.filter(function (i) { return i !== 0; }).map(function (i) {
+      var x0 = pins[0][0], y0 = pins[0][1], x1 = pins[i][0], y1 = pins[i][1];
       var mx = (x0 + x1) / 2;
       var my = (y0 + y1) / 2 - Math.min(60, Math.hypot(x1 - x0, y1 - y0) * 0.18);
       return 'M' + x0.toFixed(1) + ',' + y0.toFixed(1) + ' Q' + mx.toFixed(1) + ',' + my.toFixed(1) + ' ' + x1.toFixed(1) + ',' + y1.toFixed(1);
     });
 
-    var svgParts = [
+    mapPanel.innerHTML = [
       '<svg viewBox="0 0 800 640" aria-hidden="true">',
-      '<path d="' + geo.path + '" fill="#f5efe7" stroke="#dcd1c3" stroke-width="1.5" stroke-linejoin="round"></path>',
+      '<path d="' + geo.path + '" fill="#e8edee" stroke="#c9d2d5" stroke-width="1.5" stroke-linejoin="round"></path>',
       links.map(function (d) {
         return '<path d="' + d + '" fill="none" stroke="#f26522" stroke-width="1.5" stroke-dasharray="3 8" stroke-linecap="round" opacity="0.45" style="animation:' + (reduceMotion ? 'none' : 'wzDash 1.6s linear infinite') + '"></path>';
       }).join(''),
       '</svg>'
     ].join('');
 
-    mapPanel.innerHTML = svgParts;
-
-    LOCS.forEach(function (loc, i) {
+    shown.forEach(function (i) {
       var pt = pins[i];
-      var x = +(pt[0] / 8).toFixed(2), y = +(pt[1] / 6.4).toFixed(2);
       var btn = document.createElement('button');
       btn.type = 'button';
-      btn.className = 'map-pin' + (i === activeLoc ? ' is-active' : '');
-      btn.style.left = x + '%';
-      btn.style.top = y + '%';
-      btn.setAttribute('aria-label', loc.name);
-      btn.title = loc.name;
-      btn.innerHTML = '<span class="dot"></span>';
-      btn.addEventListener('click', function () { setActiveLoc(i); });
+      btn.className = 'map-pin' + (i === activeSite ? ' is-active' : '');
+      btn.style.left = (pt[0] / 8).toFixed(2) + '%';
+      btn.style.top = (pt[1] / 6.4).toFixed(2) + '%';
+      btn.setAttribute('aria-label', SITES[i].name);
+      btn.title = SITES[i].name;
+      btn.innerHTML = '<span class="dot"></span><span class="pin-name">' + SITES[i].name + '</span>';
+      btn.addEventListener('click', function () { setActiveSite(i); });
       mapPanel.appendChild(btn);
     });
   }
 
-  function setActiveLoc(i) {
-    activeLoc = i;
-    renderLocList();
+  function setActiveSite(i) {
+    activeSite = i;
     renderMap();
+    renderDetail();
   }
 
-  renderLocList();
+  function setActiveCat(key) {
+    activeCat = key;
+    var first = indexesFor(key)[0];
+    if (typeof first === 'number') activeSite = first;
+    renderFilters();
+    renderMap();
+    renderDetail();
+  }
+
+  renderFilters();
+  renderDetail();
 
   // Geometry is pre-projected at build time (see js/libya-geo.js), so the map
   // draws immediately with no network request and no mapping library. If that
-  // file is ever missing the section degrades to the location list alone.
+  // file is ever missing the section degrades to the filter and detail panel.
   if (window.WAZEN_LIBYA && window.WAZEN_LIBYA.outline) {
     geo = { path: window.WAZEN_LIBYA.outline, pts: window.WAZEN_LIBYA.points };
     renderMap();
