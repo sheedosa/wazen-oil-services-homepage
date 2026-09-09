@@ -42,8 +42,8 @@
 </div>
 
 <header id="top" class="hero">
-  <img class="hero-fallback-img" src="assets/careers-b.jpg" alt="" aria-hidden="true">
-  <video class="hero-video" data-hero-video muted loop playsinline aria-hidden="true"></video>
+  <img class="hero-fallback-img" src="assets/hero-poster.jpg" alt="" aria-hidden="true">
+  <video class="hero-video" data-hero-video muted loop playsinline preload="metadata" poster="assets/hero-poster.jpg" aria-hidden="true"></video>
   <div class="hero-scrim-v"></div>
   <div class="hero-scrim-h"></div>
   <div class="hero-inner">
@@ -244,13 +244,59 @@
   </div>
 </section>
 
-<section id="careers" class="section-tight-top" style="background:#fff">
-  <div class="wrap careers-grid">
-    <div class="careers-media" data-reveal>
-      <img class="main" src="assets/careers-a.jpg" alt="Wazen field crew at a storage tank site">
-      <img class="overlap" src="assets/careers-b.jpg" alt="Wazen technician overlooking a field site">
+<section id="careers" class="people">
+  <!-- Photo field sits behind the copy card; every tile is decorative. -->
+  <div class="people-mosaic" aria-hidden="true">
+    <div class="pm-row pm-top">
+      <img class="pm-t" src="assets/careers/wide-1.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async" data-strip>
+      <img class="pm-t" src="assets/careers/sq-01.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async" data-strip>
+      <img class="pm-t" src="assets/careers/sq-02.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async">
+      <img class="pm-t" src="assets/careers/wide-2.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async">
+      <img class="pm-t" src="assets/careers/sq-03.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async">
+      <img class="pm-t" src="assets/careers/sq-04.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async">
+      <img class="pm-t" src="assets/careers/wide-3.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async">
+      <img class="pm-t" src="assets/careers/sq-05.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async" data-strip>
     </div>
-    <div class="careers-copy" data-reveal>
+    <div class="pm-mid">
+      <div class="pm-col pm-left">
+      <img class="pm-t" src="assets/careers/sq-06.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async">
+      <img class="pm-t" src="assets/careers/sq-07.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async">
+      <img class="pm-t" src="assets/careers/sq-08.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async">
+      <img class="pm-t" src="assets/careers/sq-09.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async">
+      </div>
+      <img class="pm-hero" src="assets/careers/main.jpg" alt="" aria-hidden="true" width="1400" height="1119" data-strip>
+      <div class="pm-col pm-narrow">
+      <img class="pm-t" src="assets/careers/sq-10.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async">
+      <img class="pm-t" src="assets/careers/sq-11.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async" data-strip>
+      <img class="pm-t" src="assets/careers/sq-12.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async">
+      </div>
+      <div class="pm-copyspace"></div>
+      <div class="pm-col pm-right">
+      <img class="pm-t" src="assets/careers/tall-1.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async">
+      <img class="pm-t" src="assets/careers/sq-13.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async">
+      <img class="pm-t" src="assets/careers/sq-14.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async">
+      <img class="pm-t" src="assets/careers/tall-2.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async">
+      </div>
+    </div>
+    <div class="pm-row pm-bottom">
+      <img class="pm-t" src="assets/careers/sq-15.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async">
+      <img class="pm-t" src="assets/careers/wide-4.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async">
+      <img class="pm-t" src="assets/careers/sq-16.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async" data-strip>
+      <img class="pm-t" src="assets/careers/sq-17.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async">
+      <img class="pm-t" src="assets/careers/wide-5.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async">
+      <img class="pm-t" src="assets/careers/sq-18.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async">
+      <img class="pm-t" src="assets/careers/sq-19.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async" data-strip>
+      <img class="pm-t" src="assets/careers/sq-20.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async">
+      <img class="pm-t" src="assets/careers/tall-3.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async">
+      <img class="pm-t" src="assets/careers/sq-21.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async">
+      <img class="pm-t" src="assets/careers/sq-22.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async">
+      <img class="pm-t" src="assets/careers/sq-23.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async">
+      <img class="pm-t" src="assets/careers/sq-24.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async">
+    </div>
+  </div>
+
+  <div class="wrap people-wrap">
+    <div class="people-card" data-reveal>
       <div class="eyebrow">Our People &amp; Local Capability</div>
       <h2>Building the Future of Libya's Energy Workforce</h2>
       <div class="rule"></div>
@@ -269,26 +315,35 @@
     <div class="marquee-mask">
       <div class="marquee-track">
         <div class="marquee-set interactive">
-          <div class="client-chip">NOC</div>
-          <div class="client-chip">Akakus</div>
-          <div class="client-chip">Mellitah</div>
-          <div class="client-chip">Sarir Oil Operations</div>
-          <div class="client-chip">Wintershall Dea</div>
-          <div class="client-chip">Sensia</div>
-          <div class="client-chip">Rockwell Automation</div>
-          <div class="client-chip">Swagelok</div>
-          <div class="client-chip">Kent PLC</div>
+          <div class="client-chip"><img src="assets/logos/01.png" alt="Akakus Oil Operations" decoding="async"></div>
+          <div class="client-chip"><img src="assets/logos/02.svg" alt="Eni" decoding="async"></div>
+          <div class="client-chip"><img src="assets/logos/03.png" alt="Brega Petroleum Marketing Company" decoding="async"></div>
+          <div class="client-chip"><img src="assets/logos/04.png" alt="Arabian Gulf Oil Company" decoding="async"></div>
+          <div class="client-chip"><img src="assets/logos/05.svg" alt="Harouge Oil Operations" decoding="async"></div>
+          <div class="client-chip"><img src="assets/logos/06.png" alt="Mabruk Oil Operations" decoding="async"></div>
+          <div class="client-chip"><img src="assets/logos/07.png" alt="Mellitah Oil &amp; Gas" decoding="async"></div>
+          <div class="client-chip"><img src="assets/logos/08.png" alt="Sarir Oil Operations" decoding="async"></div>
+          <div class="client-chip"><img src="assets/logos/09.png" alt="Sirte Oil Company" decoding="async"></div>
+          <div class="client-chip"><img src="assets/logos/10.png" alt="Waha Oil Company" decoding="async"></div>
+          <div class="client-chip"><img src="assets/logos/11.png" alt="Wintershall Dea" decoding="async"></div>
+          <div class="client-chip"><img src="assets/logos/12.png" alt="Azzawiya Oil Refining Company" decoding="async"></div>
+          <div class="client-chip"><img src="assets/logos/13.png" alt="Zueitina Oil Company" decoding="async"></div>
         </div>
+        <!-- Duplicate set keeps the marquee loop seamless; hidden from AT. -->
         <div class="marquee-set" aria-hidden="true">
-          <div class="client-chip">NOC</div>
-          <div class="client-chip">Akakus</div>
-          <div class="client-chip">Mellitah</div>
-          <div class="client-chip">Sarir Oil Operations</div>
-          <div class="client-chip">Wintershall Dea</div>
-          <div class="client-chip">Sensia</div>
-          <div class="client-chip">Rockwell Automation</div>
-          <div class="client-chip">Swagelok</div>
-          <div class="client-chip">Kent PLC</div>
+          <div class="client-chip"><img src="assets/logos/01.png" alt="" decoding="async" aria-hidden="true"></div>
+          <div class="client-chip"><img src="assets/logos/02.svg" alt="" decoding="async" aria-hidden="true"></div>
+          <div class="client-chip"><img src="assets/logos/03.png" alt="" decoding="async" aria-hidden="true"></div>
+          <div class="client-chip"><img src="assets/logos/04.png" alt="" decoding="async" aria-hidden="true"></div>
+          <div class="client-chip"><img src="assets/logos/05.svg" alt="" decoding="async" aria-hidden="true"></div>
+          <div class="client-chip"><img src="assets/logos/06.png" alt="" decoding="async" aria-hidden="true"></div>
+          <div class="client-chip"><img src="assets/logos/07.png" alt="" decoding="async" aria-hidden="true"></div>
+          <div class="client-chip"><img src="assets/logos/08.png" alt="" decoding="async" aria-hidden="true"></div>
+          <div class="client-chip"><img src="assets/logos/09.png" alt="" decoding="async" aria-hidden="true"></div>
+          <div class="client-chip"><img src="assets/logos/10.png" alt="" decoding="async" aria-hidden="true"></div>
+          <div class="client-chip"><img src="assets/logos/11.png" alt="" decoding="async" aria-hidden="true"></div>
+          <div class="client-chip"><img src="assets/logos/12.png" alt="" decoding="async" aria-hidden="true"></div>
+          <div class="client-chip"><img src="assets/logos/13.png" alt="" decoding="async" aria-hidden="true"></div>
         </div>
       </div>
     </div>
