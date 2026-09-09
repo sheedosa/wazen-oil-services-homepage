@@ -5,7 +5,25 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Wazen Oil Services — The Strategic Gateway to Libya's Energy Sector</title>
 <meta name="description" content="Wazen Oil Services is a Libyan-owned oilfield services company delivering full-scope field solutions — engineering, construction, operations, automation, supply chain and workforce — for international energy companies operating in Libya since 2007.">
-<link rel="icon" href="data:,">
+<link rel="canonical" href="https://sheedosa.github.io/wazen-oil-services-homepage/">
+<link rel="icon" href="assets/favicon.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Wazen Oil Services">
+<meta property="og:title" content="Wazen Oil Services — The Strategic Gateway to Libya's Energy Sector">
+<meta property="og:description" content="From market entry to project delivery, Wazen provides the local infrastructure, technical capability and operational expertise international energy companies need to execute successfully in Libya.">
+<meta property="og:url" content="https://sheedosa.github.io/wazen-oil-services-homepage/">
+<meta property="og:image" content="https://sheedosa.github.io/wazen-oil-services-homepage/assets/hero-poster.jpg">
+<meta property="og:image:width" content="1920">
+<meta property="og:image:height" content="800">
+<meta property="og:image:alt" content="Wazen field operations in Libya">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Wazen Oil Services — The Strategic Gateway to Libya's Energy Sector">
+<meta name="twitter:description" content="From market entry to project delivery, Wazen provides the local infrastructure, technical capability and operational expertise international energy companies need to execute successfully in Libya.">
+<meta name="twitter:image" content="https://sheedosa.github.io/wazen-oil-services-homepage/assets/hero-poster.jpg">
+<meta name="theme-color" content="#141519">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Sans+3:wght@400;600&display=swap">
@@ -13,36 +31,39 @@
 </head>
 <body>
 
+<a class="skip-link" href="#top">Skip to content</a>
+
 <nav class="nav" data-nav>
   <button class="nav-burger" data-nav-burger aria-label="Menu" aria-expanded="false" aria-controls="mobile-menu">
     <span></span><span></span><span></span>
   </button>
   <div class="nav-links">
     <a href="#top" class="current">Home</a>
-    <a href="#company">Company</a>
-    <a href="#capabilities">Capabilities</a>
-    <a href="#partnerships" data-tab-link="2">Global Partnerships</a>
-    <a href="#track-record" data-tab-link="1">Track Record</a>
-    <a href="#careers">Careers</a>
-    <a href="#contact">Contact</a>
+    <a href="why-wazen.html">Company</a>
+    <a href="capabilities.html">Capabilities</a>
+    <a href="market-entry.html">Global Partnerships</a>
+    <a href="track-record.html">Track Record</a>
+    <a href="careers.html">Careers</a>
+    <a href="contact.html">Contact</a>
   </div>
   <a href="#top" class="nav-brand">
-    <img src="assets/wazen-logo-dark-bg.svg" alt="Wazen Oil Services">
+    <img src="assets/wazen-logo-dark-bg.svg" alt="Wazen Oil Services" width="805" height="408">
   </a>
 </nav>
 
 <div class="mobile-menu" id="mobile-menu" data-mobile-menu>
   <a href="#top" class="current">Home</a>
-  <a href="#company">Company</a>
-  <a href="#capabilities">Capabilities</a>
-  <a href="#partnerships" data-tab-link="2">Global Partnerships</a>
-  <a href="#track-record" data-tab-link="1">Track Record</a>
-  <a href="#careers">Careers</a>
-  <a href="#contact">Contact</a>
+  <a href="why-wazen.html">Company</a>
+  <a href="capabilities.html">Capabilities</a>
+  <a href="market-entry.html">Global Partnerships</a>
+  <a href="track-record.html">Track Record</a>
+  <a href="careers.html">Careers</a>
+  <a href="contact.html">Contact</a>
 </div>
 
+<main>
 <header id="top" class="hero">
-  <img class="hero-fallback-img" src="assets/hero-poster.jpg" alt="" aria-hidden="true">
+  <img class="hero-fallback-img" src="assets/hero-poster.jpg" alt="" aria-hidden="true" width="1920" height="800">
   <video class="hero-video" data-hero-video muted loop playsinline preload="metadata" poster="assets/hero-poster.jpg" aria-hidden="true"></video>
   <div class="hero-scrim-v"></div>
   <div class="hero-scrim-h"></div>
@@ -124,21 +145,17 @@
 
 <section id="company" class="section section-tight-top" style="background:#fff">
   <div class="wrap">
-    <!-- Bare anchors so the nav's deep links still land here without JS; the
-         script upgrades them to also select the matching tab. -->
-    <span id="track-record" class="anchor-offset"></span>
-    <span id="partnerships" class="anchor-offset"></span>
-
+    <h2 class="visually-hidden">Wazen at a glance</h2>
     <div class="tabbar-wrap" data-reveal>
       <div class="tabbar" role="tablist" aria-label="Wazen at a glance" data-tabbar>
-        <button role="tab" type="button" class="is-active" data-tab="0" aria-selected="true">Strategic Foundations</button>
-        <button role="tab" type="button" data-tab="1" aria-selected="false">Proven in the Field</button>
-        <button role="tab" type="button" data-tab="2" aria-selected="false">International Partnerships</button>
+        <button role="tab" type="button" class="is-active" data-tab="0" id="tab-0" aria-controls="panel-0" aria-selected="true" tabindex="0">Strategic Foundations</button>
+        <button role="tab" type="button" data-tab="1" id="tab-1" aria-controls="panel-1" aria-selected="false" tabindex="-1">Proven in the Field</button>
+        <button role="tab" type="button" data-tab="2" id="tab-2" aria-controls="panel-2" aria-selected="false" tabindex="-1">International Partnerships</button>
       </div>
     </div>
 
     <div class="tab-panels">
-      <div class="tab-panel is-active" data-panel="0">
+      <div class="tab-panel is-active" data-panel="0" id="panel-0" role="tabpanel" aria-labelledby="tab-0" tabindex="0">
         <div class="tab-intro">
           <h3>Built for Libya. Ready to Deliver.</h3>
           <p>Successful delivery in Libya requires more than technical capability. Wazen combines local knowledge, established infrastructure and on-the-ground execution capability to deliver where it matters.</p>
@@ -165,7 +182,7 @@
         </div>
       </div>
 
-      <div class="tab-panel" data-panel="1">
+      <div class="tab-panel" data-panel="1" id="panel-1" role="tabpanel" aria-labelledby="tab-1" tabindex="0">
         <div class="tab-intro">
           <h3>Proven Across the Project Lifecycle.</h3>
           <p>From major infrastructure and long-term field operations to the integration of international technologies, Wazen's track record demonstrates capability across the project and asset lifecycle.</p>
@@ -175,27 +192,27 @@
             <div class="kicker">Build</div>
             <h3>Major Energy Infrastructure</h3>
             <p>Engineering and field execution of critical energy infrastructure, including major storage tanks, pipelines, flowlines and multidisciplinary production facilities.</p>
-            <a href="#contact" class="feature-link">500,000 BBL Harouge Tank Project &rsaquo;</a>
-            <a href="#contact" class="link">Explore Build Projects &rsaquo;</a>
+            <a href="track-record.html" class="feature-link">500,000 BBL Harouge Tank Project &rsaquo;</a>
+            <a href="track-record.html" class="link">Explore Build Projects &rsaquo;</a>
           </div>
           <div class="tab-card">
             <div class="kicker">Integrate</div>
             <h3>Measurement &amp; Automation &middot; Technology</h3>
             <p>Integrating international measurement, automation and control technologies through local engineering, installation and field execution.</p>
-            <a href="#contact" class="feature-link">Mellitah &middot; Integrated Metering Systems &rsaquo;</a>
-            <a href="#contact" class="link">Explore Integration Projects &rsaquo;</a>
+            <a href="track-record.html" class="feature-link">Mellitah &middot; Integrated Metering Systems &rsaquo;</a>
+            <a href="track-record.html" class="link">Explore Integration Projects &rsaquo;</a>
           </div>
           <div class="tab-card">
             <div class="kicker">Operate</div>
             <h3>Operations &amp; Production Support &middot; Shararah</h3>
             <p>Long-term field support combining maintenance, rehabilitation and production-infrastructure works to support safe, reliable operations.</p>
-            <a href="#contact" class="feature-link">Ongoing Field Presence &rsaquo;</a>
-            <a href="#contact" class="link">Explore Operations &rsaquo;</a>
+            <a href="track-record.html" class="feature-link">Ongoing Field Presence &rsaquo;</a>
+            <a href="track-record.html" class="link">Explore Operations &rsaquo;</a>
           </div>
         </div>
       </div>
 
-      <div class="tab-panel" data-panel="2">
+      <div class="tab-panel" data-panel="2" id="panel-2" role="tabpanel" aria-labelledby="tab-2" tabindex="0">
         <div class="tab-intro">
           <h3>International Capability. Libyan Execution.</h3>
           <p>Wazen works with international technology, engineering and service companies to provide the local infrastructure, technical capability and field execution needed to operate successfully in Libya.</p>
@@ -205,19 +222,19 @@
             <h3>Market Entry &amp; Local Support</h3>
             <div class="meta">Local establishment and operational support</div>
             <p>Equipping clients and partners with the local infrastructure and mobilisation capabilities needed to operate in Libya on day one, eliminating the time and risk of building from the ground up.</p>
-            <a href="#contact" class="link">Learn More &rsaquo;</a>
+            <a href="market-entry.html" class="link">Learn More &rsaquo;</a>
           </div>
           <div class="tab-card">
             <h3>Technology Integration</h3>
             <div class="meta">International technology. Local execution.</div>
             <p>Providing the local engineering, installation, commissioning support and after-sales capability required to deploy international technologies in Libyan operating environments.</p>
-            <a href="#contact" class="link">Learn More &rsaquo;</a>
+            <a href="market-entry.html" class="link">Learn More &rsaquo;</a>
           </div>
           <div class="tab-card">
             <h3>Delivery Partnerships</h3>
             <div class="meta">Combining international expertise with local capability</div>
             <p>Working alongside international engineering and service companies to execute projects through Wazen's local teams, infrastructure and field-delivery platform.</p>
-            <a href="#contact" class="link">Learn More &rsaquo;</a>
+            <a href="market-entry.html" class="link">Learn More &rsaquo;</a>
           </div>
         </div>
       </div>
@@ -233,7 +250,7 @@
       <div class="rule"></div>
     </div>
 
-    <div class="map-filters" role="tablist" aria-label="Location type" data-map-filters data-reveal></div>
+    <div class="map-filters" role="group" aria-label="Filter locations by type" data-map-filters data-reveal></div>
 
     <p class="lede footprint-lede" data-reveal>From Tripoli and Benghazi to field locations across Libya's major producing regions, Wazen's established infrastructure supports the mobilisation of people, equipment and technical resources where they are needed.</p>
 
@@ -248,50 +265,50 @@
   <!-- Photo field sits behind the copy card; every tile is decorative. -->
   <div class="people-mosaic" aria-hidden="true">
     <div class="pm-row pm-top">
-      <img class="pm-t" src="assets/careers/wide-1.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async" data-strip>
-      <img class="pm-t" src="assets/careers/sq-01.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async" data-strip>
-      <img class="pm-t" src="assets/careers/sq-02.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async">
-      <img class="pm-t" src="assets/careers/wide-2.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async">
-      <img class="pm-t" src="assets/careers/sq-03.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async">
-      <img class="pm-t" src="assets/careers/sq-04.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async">
-      <img class="pm-t" src="assets/careers/wide-3.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async">
-      <img class="pm-t" src="assets/careers/sq-05.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async" data-strip>
+      <img class="pm-t" src="assets/careers/wide-1.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async" data-strip width="600" height="299">
+      <img class="pm-t" src="assets/careers/sq-01.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async" data-strip width="300" height="300">
+      <img class="pm-t" src="assets/careers/sq-02.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async" width="300" height="300">
+      <img class="pm-t" src="assets/careers/wide-2.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async" width="600" height="299">
+      <img class="pm-t" src="assets/careers/sq-03.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async" width="300" height="300">
+      <img class="pm-t" src="assets/careers/sq-04.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async" width="300" height="300">
+      <img class="pm-t" src="assets/careers/wide-3.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async" width="600" height="299">
+      <img class="pm-t" src="assets/careers/sq-05.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async" data-strip width="300" height="300">
     </div>
     <div class="pm-mid">
       <div class="pm-col pm-left">
-      <img class="pm-t" src="assets/careers/sq-06.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async">
-      <img class="pm-t" src="assets/careers/sq-07.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async">
-      <img class="pm-t" src="assets/careers/sq-08.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async">
-      <img class="pm-t" src="assets/careers/sq-09.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async">
+      <img class="pm-t" src="assets/careers/sq-06.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async" width="300" height="300">
+      <img class="pm-t" src="assets/careers/sq-07.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async" width="300" height="300">
+      <img class="pm-t" src="assets/careers/sq-08.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async" width="300" height="300">
+      <img class="pm-t" src="assets/careers/sq-09.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async" width="300" height="300">
       </div>
-      <img class="pm-hero" src="assets/careers/main.jpg" alt="" aria-hidden="true" width="1400" height="1119" data-strip>
+      <img class="pm-hero" src="assets/careers/main.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async" width="1400" height="1119" data-strip>
       <div class="pm-col pm-narrow">
-      <img class="pm-t" src="assets/careers/sq-10.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async">
-      <img class="pm-t" src="assets/careers/sq-11.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async" data-strip>
-      <img class="pm-t" src="assets/careers/sq-12.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async">
+      <img class="pm-t" src="assets/careers/sq-10.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async" width="300" height="300">
+      <img class="pm-t" src="assets/careers/sq-11.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async" data-strip width="300" height="300">
+      <img class="pm-t" src="assets/careers/sq-12.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async" width="300" height="300">
       </div>
       <div class="pm-copyspace"></div>
       <div class="pm-col pm-right">
-      <img class="pm-t" src="assets/careers/tall-1.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async">
-      <img class="pm-t" src="assets/careers/sq-13.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async">
-      <img class="pm-t" src="assets/careers/sq-14.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async">
-      <img class="pm-t" src="assets/careers/tall-2.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async">
+      <img class="pm-t" src="assets/careers/tall-1.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async" width="299" height="600">
+      <img class="pm-t" src="assets/careers/sq-13.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async" width="300" height="300">
+      <img class="pm-t" src="assets/careers/sq-14.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async" width="300" height="300">
+      <img class="pm-t" src="assets/careers/tall-2.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async" width="299" height="600">
       </div>
     </div>
     <div class="pm-row pm-bottom">
-      <img class="pm-t" src="assets/careers/sq-15.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async">
-      <img class="pm-t" src="assets/careers/wide-4.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async">
-      <img class="pm-t" src="assets/careers/sq-16.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async" data-strip>
-      <img class="pm-t" src="assets/careers/sq-17.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async">
-      <img class="pm-t" src="assets/careers/wide-5.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async">
-      <img class="pm-t" src="assets/careers/sq-18.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async">
-      <img class="pm-t" src="assets/careers/sq-19.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async" data-strip>
-      <img class="pm-t" src="assets/careers/sq-20.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async">
-      <img class="pm-t" src="assets/careers/tall-3.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async">
-      <img class="pm-t" src="assets/careers/sq-21.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async">
-      <img class="pm-t" src="assets/careers/sq-22.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async">
-      <img class="pm-t" src="assets/careers/sq-23.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async">
-      <img class="pm-t" src="assets/careers/sq-24.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async">
+      <img class="pm-t" src="assets/careers/sq-15.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async" width="300" height="300">
+      <img class="pm-t" src="assets/careers/wide-4.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async" width="600" height="299">
+      <img class="pm-t" src="assets/careers/sq-16.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async" data-strip width="300" height="300">
+      <img class="pm-t" src="assets/careers/sq-17.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async" width="300" height="300">
+      <img class="pm-t" src="assets/careers/wide-5.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async" width="600" height="299">
+      <img class="pm-t" src="assets/careers/sq-18.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async" width="300" height="300">
+      <img class="pm-t" src="assets/careers/sq-19.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async" data-strip width="300" height="300">
+      <img class="pm-t" src="assets/careers/sq-20.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async" width="300" height="300">
+      <img class="pm-t" src="assets/careers/tall-3.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async" width="299" height="600">
+      <img class="pm-t" src="assets/careers/sq-21.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async" width="300" height="300">
+      <img class="pm-t" src="assets/careers/sq-22.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async" width="300" height="300">
+      <img class="pm-t" src="assets/careers/sq-23.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async" width="300" height="300">
+      <img class="pm-t" src="assets/careers/sq-24.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async" width="300" height="300">
     </div>
   </div>
 
@@ -315,35 +332,35 @@
     <div class="marquee-mask">
       <div class="marquee-track">
         <div class="marquee-set interactive">
-          <div class="client-chip"><img src="assets/logos/01.png" alt="Akakus Oil Operations" decoding="async"></div>
-          <div class="client-chip"><img src="assets/logos/02.svg" alt="Eni" decoding="async"></div>
-          <div class="client-chip"><img src="assets/logos/03.png" alt="Brega Petroleum Marketing Company" decoding="async"></div>
-          <div class="client-chip"><img src="assets/logos/04.png" alt="Arabian Gulf Oil Company" decoding="async"></div>
-          <div class="client-chip"><img src="assets/logos/05.svg" alt="Harouge Oil Operations" decoding="async"></div>
-          <div class="client-chip"><img src="assets/logos/06.png" alt="Mabruk Oil Operations" decoding="async"></div>
-          <div class="client-chip"><img src="assets/logos/07.png" alt="Mellitah Oil &amp; Gas" decoding="async"></div>
-          <div class="client-chip"><img src="assets/logos/08.png" alt="Sarir Oil Operations" decoding="async"></div>
-          <div class="client-chip"><img src="assets/logos/09.png" alt="Sirte Oil Company" decoding="async"></div>
-          <div class="client-chip"><img src="assets/logos/10.png" alt="Waha Oil Company" decoding="async"></div>
-          <div class="client-chip"><img src="assets/logos/11.png" alt="Wintershall Dea" decoding="async"></div>
-          <div class="client-chip"><img src="assets/logos/12.png" alt="Azzawiya Oil Refining Company" decoding="async"></div>
-          <div class="client-chip"><img src="assets/logos/13.png" alt="Zueitina Oil Company" decoding="async"></div>
+          <div class="client-chip"><img data-src="assets/logos/01.png" alt="Akakus Oil Operations" decoding="async" width="152" height="152"></div>
+          <div class="client-chip"><img data-src="assets/logos/02.svg" alt="Eni" decoding="async" width="312" height="118"></div>
+          <div class="client-chip"><img data-src="assets/logos/03.png" alt="Brega Petroleum Marketing Company" decoding="async" width="142" height="152"></div>
+          <div class="client-chip"><img data-src="assets/logos/04.png" alt="Arabian Gulf Oil Company" decoding="async" width="160" height="152"></div>
+          <div class="client-chip"><img data-src="assets/logos/05.svg" alt="Harouge Oil Operations" decoding="async" width="324" height="160"></div>
+          <div class="client-chip"><img data-src="assets/logos/06.png" alt="Mabruk Oil Operations" decoding="async" width="151" height="152"></div>
+          <div class="client-chip"><img data-src="assets/logos/07.png" alt="Mellitah Oil &amp; Gas" decoding="async" width="88" height="152"></div>
+          <div class="client-chip"><img data-src="assets/logos/08.png" alt="Sarir Oil Operations" decoding="async" width="152" height="152"></div>
+          <div class="client-chip"><img data-src="assets/logos/09.png" alt="Sirte Oil Company" decoding="async" width="144" height="152"></div>
+          <div class="client-chip"><img data-src="assets/logos/10.png" alt="Waha Oil Company" decoding="async" width="144" height="152"></div>
+          <div class="client-chip"><img data-src="assets/logos/11.png" alt="Wintershall Dea" decoding="async" width="232" height="152"></div>
+          <div class="client-chip"><img data-src="assets/logos/12.png" alt="Azzawiya Oil Refining Company" decoding="async" width="134" height="152"></div>
+          <div class="client-chip"><img data-src="assets/logos/13.png" alt="Zueitina Oil Company" decoding="async" width="344" height="111"></div>
         </div>
         <!-- Duplicate set keeps the marquee loop seamless; hidden from AT. -->
         <div class="marquee-set" aria-hidden="true">
-          <div class="client-chip"><img src="assets/logos/01.png" alt="" decoding="async" aria-hidden="true"></div>
-          <div class="client-chip"><img src="assets/logos/02.svg" alt="" decoding="async" aria-hidden="true"></div>
-          <div class="client-chip"><img src="assets/logos/03.png" alt="" decoding="async" aria-hidden="true"></div>
-          <div class="client-chip"><img src="assets/logos/04.png" alt="" decoding="async" aria-hidden="true"></div>
-          <div class="client-chip"><img src="assets/logos/05.svg" alt="" decoding="async" aria-hidden="true"></div>
-          <div class="client-chip"><img src="assets/logos/06.png" alt="" decoding="async" aria-hidden="true"></div>
-          <div class="client-chip"><img src="assets/logos/07.png" alt="" decoding="async" aria-hidden="true"></div>
-          <div class="client-chip"><img src="assets/logos/08.png" alt="" decoding="async" aria-hidden="true"></div>
-          <div class="client-chip"><img src="assets/logos/09.png" alt="" decoding="async" aria-hidden="true"></div>
-          <div class="client-chip"><img src="assets/logos/10.png" alt="" decoding="async" aria-hidden="true"></div>
-          <div class="client-chip"><img src="assets/logos/11.png" alt="" decoding="async" aria-hidden="true"></div>
-          <div class="client-chip"><img src="assets/logos/12.png" alt="" decoding="async" aria-hidden="true"></div>
-          <div class="client-chip"><img src="assets/logos/13.png" alt="" decoding="async" aria-hidden="true"></div>
+          <div class="client-chip"><img data-src="assets/logos/01.png" alt="" decoding="async" aria-hidden="true" width="152" height="152"></div>
+          <div class="client-chip"><img data-src="assets/logos/02.svg" alt="" decoding="async" aria-hidden="true" width="312" height="118"></div>
+          <div class="client-chip"><img data-src="assets/logos/03.png" alt="" decoding="async" aria-hidden="true" width="142" height="152"></div>
+          <div class="client-chip"><img data-src="assets/logos/04.png" alt="" decoding="async" aria-hidden="true" width="160" height="152"></div>
+          <div class="client-chip"><img data-src="assets/logos/05.svg" alt="" decoding="async" aria-hidden="true" width="324" height="160"></div>
+          <div class="client-chip"><img data-src="assets/logos/06.png" alt="" decoding="async" aria-hidden="true" width="151" height="152"></div>
+          <div class="client-chip"><img data-src="assets/logos/07.png" alt="" decoding="async" aria-hidden="true" width="88" height="152"></div>
+          <div class="client-chip"><img data-src="assets/logos/08.png" alt="" decoding="async" aria-hidden="true" width="152" height="152"></div>
+          <div class="client-chip"><img data-src="assets/logos/09.png" alt="" decoding="async" aria-hidden="true" width="144" height="152"></div>
+          <div class="client-chip"><img data-src="assets/logos/10.png" alt="" decoding="async" aria-hidden="true" width="144" height="152"></div>
+          <div class="client-chip"><img data-src="assets/logos/11.png" alt="" decoding="async" aria-hidden="true" width="232" height="152"></div>
+          <div class="client-chip"><img data-src="assets/logos/12.png" alt="" decoding="async" aria-hidden="true" width="134" height="152"></div>
+          <div class="client-chip"><img data-src="assets/logos/13.png" alt="" decoding="async" aria-hidden="true" width="344" height="111"></div>
         </div>
       </div>
     </div>
@@ -353,7 +370,7 @@
 <section id="contact" class="cta">
   <div class="cta-top-rule"></div>
   <div class="cta-glow"></div>
-  <img class="cta-watermark" src="assets/wazen-logo-white.svg" alt="" aria-hidden="true">
+  <img class="cta-watermark" src="assets/wazen-logo-white.svg" alt="" aria-hidden="true" width="805" height="408">
   <div class="wrap cta-inner" data-reveal>
     <div>
       <div class="cta-eyebrow">Partner With Wazen</div>
@@ -387,22 +404,24 @@
   </div>
 </section>
 
+</main>
+
 <footer class="site-footer">
   <div class="wrap footer-grid">
     <div class="footer-brand">
-      <img src="assets/wazen-logo-dark-bg.svg" alt="Wazen Oil Services">
+      <img src="assets/wazen-logo-dark-bg.svg" alt="Wazen Oil Services" width="805" height="408">
       <p>Wazen Oil Services — where international partners find a local foundation they can trust.</p>
     </div>
     <div>
       <div class="footer-h">Explore</div>
       <div class="footer-links">
-        <a href="#company">Company Overview</a>
-        <a href="#contact">Contact Us</a>
-        <a href="#capabilities">HSE &amp; Quality</a>
-        <a href="#track-record" data-tab-link="1">News &amp; Insights</a>
-        <a href="#careers">Careers</a>
-        <a href="#footprint">Locations</a>
-        <a href="#company">Company Profile</a>
+        <a href="why-wazen.html">Company Overview</a>
+        <a href="contact.html">Contact Us</a>
+        <a href="why-wazen.html">HSE &amp; Quality</a>
+        <a href="track-record.html">News &amp; Insights</a>
+        <a href="careers.html">Careers</a>
+        <a href="contact.html">Locations</a>
+        <a href="why-wazen.html">Company Profile</a>
       </div>
     </div>
     <div>
@@ -423,13 +442,13 @@
   </div>
   <div class="footer-bottom">
     <div class="footer-legal">
-      <a href="#top">Terms</a>
-      <a href="#top">Privacy Policy</a>
-      <a href="#top">Code of Conduct</a>
-      <a href="#top">Safety &amp; Sustainability Policy</a>
-      <a href="#top">Quality Policy</a>
-      <a href="#top">Anti-Bribery &amp; Corruption</a>
-      <a href="#top">Modern Slavery Statement</a>
+      <a href="terms.html">Terms</a>
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="code-of-conduct.html">Code of Conduct</a>
+      <a href="safety-sustainability.html">Safety &amp; Sustainability Policy</a>
+      <a href="quality-policy.html">Quality Policy</a>
+      <a href="anti-bribery.html">Anti-Bribery &amp; Corruption</a>
+      <a href="modern-slavery.html">Modern Slavery Statement</a>
     </div>
     <div>Copyright &copy; 2026 Wazen Oil Services. All rights reserved.</div>
   </div>

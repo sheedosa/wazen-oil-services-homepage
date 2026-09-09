@@ -8,9 +8,12 @@
   var burger = document.querySelector('[data-nav-burger]');
   var mobileMenu = document.querySelector('[data-mobile-menu]');
 
+  // The homepage nav starts transparent over the hero video and turns solid on
+  // scroll. Pages without a hero have no dark backdrop, so white nav text over
+  // the translucent gradient would be unreadable — keep those solid always.
+  var navAlwaysSolid = document.body.classList.contains('uc-page');
   function setSolid() {
-    var solid = window.scrollY > 40;
-    nav.classList.toggle('is-solid', solid);
+    nav.classList.toggle('is-solid', navAlwaysSolid || window.scrollY > 40);
   }
   window.addEventListener('scroll', setSolid, { passive: true });
   setSolid();
@@ -32,9 +35,16 @@
     a.addEventListener('click', closeMenu);
   });
 
-  /* ---------- Hero video (skipped on narrow / mobile viewports) ---------- */
+  /* ---------- Hero video ---------- */
+  /* Skipped on narrow viewports, when reduced motion is requested, and on
+     metered or slow connections — the poster carries the hero on its own. */
+  var conn = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+  var frugalNetwork = !!conn && (conn.saveData === true ||
+    /(^|-)(slow-)?2g$|^3g$/.test(conn.effectiveType || ''));
   var heroVideo = document.querySelector('[data-hero-video]');
-  if (heroVideo && !(window.matchMedia && window.matchMedia('(max-width: 860px)').matches)) {
+  var wantsVideo = !reduceMotion && !frugalNetwork &&
+    !(window.matchMedia && window.matchMedia('(max-width: 860px)').matches);
+  if (heroVideo && wantsVideo) {
     heroVideo.muted = true;
     heroVideo.defaultMuted = true;
     var src = document.createElement('source');
@@ -86,6 +96,8 @@
         var active = idx === i;
         btn.classList.toggle('is-active', active);
         btn.setAttribute('aria-selected', active ? 'true' : 'false');
+        // Roving tabindex: only the selected tab sits in the tab order.
+        btn.setAttribute('tabindex', active ? '0' : '-1');
       });
       panels.forEach(function (panel) {
         panel.classList.toggle('is-active', +panel.getAttribute('data-panel') === i);
@@ -94,19 +106,38 @@
     tabButtons.forEach(function (btn, idx) {
       btn.addEventListener('click', function () { selectTab(idx); });
     });
-    // "Track Record" / "Global Partnerships" links elsewhere on the page
-    // select the matching tab as well as scrolling here.
-    document.querySelectorAll('[data-tab-link]').forEach(function (link) {
-      link.addEventListener('click', function () {
-        selectTab(+link.getAttribute('data-tab-link'));
-      });
-    });
-
     tabbar.addEventListener('keydown', function (e) {
       var idx = tabButtons.findIndex(function (b) { return b.classList.contains('is-active'); });
       if (e.key === 'ArrowRight') { selectTab((idx + 1) % tabButtons.length); tabButtons[(idx + 1) % tabButtons.length].focus(); }
       if (e.key === 'ArrowLeft') { selectTab((idx - 1 + tabButtons.length) % tabButtons.length); tabButtons[(idx - 1 + tabButtons.length) % tabButtons.length].focus(); }
     });
+  }
+
+  /* ---------- Client logo rail ---------- */
+  /* The rail scrolls by CSS transform, so loading="lazy" never fires for the
+     chips sitting off-screen and they would scroll in blank. Load the whole
+     set once the band comes into view instead, so the bytes stay off the
+     critical path without leaving gaps. */
+  var logoImgs = document.querySelectorAll('img[data-src]');
+  if (logoImgs.length) {
+    var loadLogos = function () {
+      logoImgs.forEach(function (img) {
+        img.src = img.getAttribute('data-src');
+        img.removeAttribute('data-src');
+      });
+    };
+    var band = document.querySelector('.marquee-mask');
+    if (band && 'IntersectionObserver' in window) {
+      var logoIO = new IntersectionObserver(function (entries) {
+        if (entries.some(function (e) { return e.isIntersecting; })) {
+          loadLogos();
+          logoIO.disconnect();
+        }
+      }, { rootMargin: '400px' });
+      logoIO.observe(band);
+    } else {
+      loadLogos();
+    }
   }
 
   /* ---------- Footprint: category filter + map ---------- */
@@ -155,10 +186,10 @@
     CATS.forEach(function (cat) {
       var btn = document.createElement('button');
       btn.type = 'button';
-      btn.setAttribute('role', 'tab');
       var on = cat.key === activeCat;
       btn.className = on ? 'is-active' : '';
-      btn.setAttribute('aria-selected', on ? 'true' : 'false');
+      // A filter group, not a tablist: these control the map, not a panel.
+      btn.setAttribute('aria-pressed', on ? 'true' : 'false');
       btn.innerHTML = cat.label + '<span class="n">' + indexesFor(cat.key).length + '</span>';
       btn.addEventListener('click', function () { setActiveCat(cat.key); });
       filterBar.appendChild(btn);
