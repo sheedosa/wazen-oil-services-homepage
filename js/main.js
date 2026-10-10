@@ -113,6 +113,66 @@
     });
   }
 
+  /* ---------- Company page: timeline ---------- */
+  /* A tablist of years drives one visible panel. Arrow keys move between
+     years (roving tabindex); the orange rail fill grows to the active year. */
+  var tlRail = document.querySelector('[data-timeline]');
+  if (tlRail) {
+    var tlYears = Array.prototype.slice.call(tlRail.querySelectorAll('[role="tab"]'));
+    var tlPanels = Array.prototype.slice.call(document.querySelectorAll('[data-tl-panel]'));
+    var tlFill = tlRail.querySelector('.tl-line-fill');
+    function selectYear(i, focus) {
+      tlYears.forEach(function (btn, idx) {
+        var on = idx === i;
+        btn.setAttribute('aria-selected', on ? 'true' : 'false');
+        btn.setAttribute('tabindex', on ? '0' : '-1');
+        if (on && focus) btn.focus();
+        if (on && typeof btn.scrollIntoView === 'function' && window.innerWidth <= 960) {
+          btn.scrollIntoView({ block: 'nearest', inline: 'center', behavior: reduceMotion ? 'auto' : 'smooth' });
+        }
+      });
+      tlPanels.forEach(function (panel, idx) {
+        if (idx === i) panel.setAttribute('data-active', ''); else panel.removeAttribute('data-active');
+        panel.hidden = idx !== i;
+      });
+      if (tlFill && tlYears.length > 1) {
+        tlFill.style.height = (i / (tlYears.length - 1) * 100) + '%';
+      }
+    }
+    tlYears.forEach(function (btn, idx) {
+      btn.addEventListener('click', function () { selectYear(idx, false); });
+    });
+    tlRail.addEventListener('keydown', function (e) {
+      var cur = tlYears.findIndex(function (b) { return b.getAttribute('aria-selected') === 'true'; });
+      var next = null;
+      if (e.key === 'ArrowDown' || e.key === 'ArrowRight') next = (cur + 1) % tlYears.length;
+      if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') next = (cur - 1 + tlYears.length) % tlYears.length;
+      if (e.key === 'Home') next = 0;
+      if (e.key === 'End') next = tlYears.length - 1;
+      if (next !== null) { e.preventDefault(); selectYear(next, true); }
+    });
+    selectYear(0, false);
+  }
+
+  /* ---------- Company page: hero parallax ---------- */
+  /* The background layer scrolls at a third of page speed. Off on narrow
+     viewports (the CSS also pins it) and for reduced-motion visitors. */
+  var pxBg = document.querySelector('[data-parallax]');
+  if (pxBg && !reduceMotion && window.innerWidth > 860) {
+    var pxTicking = false;
+    var pxHero = pxBg.parentElement;
+    function parallax() {
+      pxTicking = false;
+      var r = pxHero.getBoundingClientRect();
+      if (r.bottom < 0 || r.top > window.innerHeight) return;
+      pxBg.style.transform = 'translate3d(0,' + (-r.top * 0.35).toFixed(1) + 'px,0)';
+    }
+    window.addEventListener('scroll', function () {
+      if (!pxTicking) { pxTicking = true; requestAnimationFrame(parallax); }
+    }, { passive: true });
+    parallax();
+  }
+
   /* ---------- Client logo rail ---------- */
   /* The rail scrolls by CSS transform, so loading="lazy" never fires for the
      chips sitting off-screen and they would scroll in blank. Load the whole
