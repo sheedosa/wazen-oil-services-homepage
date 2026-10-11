@@ -1051,3 +1051,57 @@ a:hover { color: var(--orange); }
 @media (max-width: 640px) {
   .cap-list--2col { grid-template-columns: 1fr; }
 }
+
+/* ======================================================================
+   Global Partnerships page
+   ====================================================================== */
+/* Partner trust bar: the homepage marquee, kept deliberately narrow. */
+.gp-trust .clients-inner { padding: 44px 0 40px; }
+.gp-trust .eyebrow { margin-bottom: 10px; }
+.gp-trust-h { font-size: clamp(17px, 1.6vw, 20px) !important; font-weight: 500; color: var(--muted) !important; max-width: 60ch; margin: 0 auto; line-height: 1.5; }
+.gp-trust .marquee-mask { margin-top: 28px; }
+.gp-trust .client-chip { height: 72px; width: 170px; }
+.ph-chip {
+  border: 1.5px dashed var(--orange) !important; background: var(--bg) !important;
+  font-family: var(--font-head); font-weight: 600; font-size: 11.5px; letter-spacing: .06em; color: var(--muted);
+}
+
+.gp-section h2 { font-size: clamp(28px, 3.2vw, 42px); }
+.gp-head { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: clamp(32px, 5vw, 72px); align-items: center; }
+.gp-head--flip .gp-head-copy { order: 2; }
+.gp-head-copy .lede { margin: 22px 0 0; }
+.gp-head-copy .lede + .lede { margin-top: 14px; }
+
+.gp-cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 56px; }
+.gp-col {
+  display: flex; flex-direction: column; padding: 30px 30px 32px;
+  background: #fff; border: 1px solid var(--border-2); border-top: 3px solid var(--orange); border-radius: 6px;
+  transition: transform .3s, box-shadow .3s;
+}
+.gp-col:hover { transform: translateY(-6px); box-shadow: 0 16px 36px rgba(27,28,32,.1); }
+.gp-col h3 { font-family: var(--font-head); font-weight: 600; font-size: 21px; margin: 0 0 12px; color: var(--charcoal); }
+.gp-col p { font-size: 15.5px; line-height: 1.7; color: var(--muted); margin: 0; }
+.gp-col-foot { margin-top: auto; padding-top: 24px; }
+.gp-col-foot .btn-outline { border-color: var(--orange); color: var(--orange-dark); }
+.gp-col-foot .btn-outline:hover { background: var(--orange); color: #fff; }
+.gp-badges { display: flex; gap: 10px; }
+.gp-badges .ph { width: 84px; font-size: 10.5px; padding: 6px; }
+
+/* Project brief card */
+.gp-brief {
+  display: grid; grid-template-columns: minmax(200px, 1fr) minmax(0, 3fr); gap: clamp(24px, 4vw, 48px);
+  margin-top: 48px; padding: 32px; background: #fff; border: 1px solid var(--border-2); border-radius: 6px;
+  border-inline-start: 4px solid var(--orange);
+}
+.gp-brief-body { margin: 0; display: flex; flex-direction: column; gap: 18px; }
+.gp-brief-body dt { font-family: var(--font-head); font-weight: 700; font-size: 12.5px; letter-spacing: .18em; text-transform: uppercase; color: var(--orange); margin-bottom: 6px; }
+.gp-brief-body dd { margin: 0; font-size: 16.5px; line-height: 1.7; color: var(--charcoal); }
+
+@media (max-width: 960px) {
+  .gp-head { grid-template-columns: 1fr; }
+  .gp-head--flip .gp-head-copy { order: 0; }
+  .gp-head .ph { max-width: 560px; }
+  .gp-cols { grid-template-columns: 1fr; gap: 16px; margin-top: 40px; }
+  .gp-brief { grid-template-columns: 1fr; padding: 24px; }
+  .gp-brief-logo { max-width: 260px; }
+}
