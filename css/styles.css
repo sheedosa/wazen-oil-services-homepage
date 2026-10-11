@@ -536,7 +536,7 @@ a:hover { color: var(--orange); }
 
 /* ---------- Clients ---------- */
 .clients { background: var(--bg-soft); border-top: 1px solid var(--border-2); }
-.clients-inner { padding: 80px 0; text-align: center; }
+.clients-inner { padding-top: 80px; padding-bottom: 80px; text-align: center; }
 .clients h2 { font-size: clamp(24px, 2.6vw, 34px); }
 .clients .lede { font-size: 16.5px; margin: 14px 0 0; }
 .clients h2 { color: var(--charcoal); }
@@ -751,6 +751,7 @@ a:hover { color: var(--orange); }
 .ph--4x3  { aspect-ratio: 4 / 3; }
 .ph--3x2  { aspect-ratio: 3 / 2; }
 .ph--1x1  { aspect-ratio: 1 / 1; }
+.ph--21x9 { aspect-ratio: 21 / 9; }
 .ph--dark { background: #2a2c33; border-color: rgba(242,101,34,.7); color: rgba(255,255,255,.7); }
 
 /* ---------- 1. Company hero ---------- */
@@ -1056,7 +1057,7 @@ a:hover { color: var(--orange); }
    Global Partnerships page
    ====================================================================== */
 /* Partner trust bar: the homepage marquee, kept deliberately narrow. */
-.gp-trust .clients-inner { padding: 44px 0 40px; }
+.gp-trust .clients-inner { padding-top: 44px; padding-bottom: 40px; }
 .gp-trust .eyebrow { margin-bottom: 10px; }
 .gp-trust-h { font-size: clamp(17px, 1.6vw, 20px) !important; font-weight: 500; color: var(--muted) !important; max-width: 60ch; margin: 0 auto; line-height: 1.5; }
 .gp-trust .marquee-mask { margin-top: 28px; }
@@ -1104,4 +1105,47 @@ a:hover { color: var(--orange); }
   .gp-cols { grid-template-columns: 1fr; gap: 16px; margin-top: 40px; }
   .gp-brief { grid-template-columns: 1fr; padding: 24px; }
   .gp-brief-logo { max-width: 260px; }
+}
+
+/* ======================================================================
+   Cross-page polish from the desktop / mobile audit
+   ====================================================================== */
+/* Keyboard focus is visible on every interactive element, not just the
+   controls that had their own rule. */
+a:focus-visible, button:focus-visible, [tabindex]:focus-visible {
+  outline: 2px solid var(--orange); outline-offset: 3px; border-radius: 3px;
+}
+/* Anchored sections clear the sticky nav. */
+[id] { scroll-margin-top: 90px; }
+
+/* Capabilities blocks: a wider slot on desktop keeps the page from running
+   to 8,500px of placeholder; phones keep the taller 16:9. */
+@media (min-width: 961px) { .cap-media .ph--16x9 { aspect-ratio: 21 / 9; } }
+
+@media (max-width: 860px) {
+  /* The overview tabs become one scrollable row of pills instead of a
+     stacked column inside a single grey capsule. */
+  .tabbar-wrap { align-items: stretch; }
+  .tabbar {
+    display: flex; flex-wrap: nowrap; justify-content: flex-start;
+    background: none; padding: 0 0 6px; border-radius: 0; gap: 8px;
+    overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch;
+    margin: 0 calc(-1 * clamp(20px, 4vw, 56px)); padding-inline: clamp(20px, 4vw, 56px);
+  }
+  .tabbar::-webkit-scrollbar { display: none; }
+  .tabbar button { flex: 0 0 auto; white-space: nowrap; background: var(--bg-soft); }
+  /* Hero trust bar: two columns instead of four stacked rows. */
+  .trust-grid { grid-template-columns: 1fr 1fr; gap: 18px 16px; padding-top: 20px; padding-bottom: 22px; }
+  .trust-item { padding-left: 12px; }
+  .trust-item .label { font-size: 10.5px; letter-spacing: .14em; }
+  /* The background-slot caption only adds noise behind the foreground slot. */
+  .co-hero-bg .ph > span { display: none; }
+  /* Footer "Explore" list in two columns to shorten the page. */
+  .footer-links { display: grid; grid-template-columns: 1fr 1fr; gap: 11px 16px; }
+}
+@media (max-width: 640px) {
+  /* Paired call-to-action buttons: equal width, full row, easy to tap. */
+  .hero-ctas, .cta-ctas { flex-direction: column; align-items: stretch; gap: 12px; }
+  .hero-ctas .btn, .cta-ctas .btn, .cap-cta .btn, .gp-col-foot .btn, .uc-ctas .btn { width: 100%; text-align: center; }
+  .uc-ctas { flex-direction: column; }
 }
