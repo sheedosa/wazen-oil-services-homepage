@@ -326,6 +326,48 @@
   // Geometry is pre-projected at build time (see js/libya-geo.js), so the map
   // draws immediately with no network request and no mapping library. If that
   // file is ever missing the section degrades to the filter and detail panel.
+  /* ---------- Capabilities page: sticky console ---------- */
+  /* The index item for the block nearest the top of the viewport is marked
+     current; clicking an item scrolls to its block. */
+  var capIndex = document.querySelector('[data-cap-index]');
+  if (capIndex) {
+    var capLinks = Array.prototype.slice.call(capIndex.querySelectorAll('[data-cap-link]'));
+    var capBlocks = Array.prototype.slice.call(document.querySelectorAll('[data-cap-block]'));
+    function setCapCurrent(id) {
+      capLinks.forEach(function (a) {
+        var on = a.getAttribute('href') === '#' + id;
+        if (on) { a.setAttribute('aria-current', 'true'); } else { a.removeAttribute('aria-current'); }
+        if (on && window.innerWidth <= 960) {
+          a.scrollIntoView({ block: 'nearest', inline: 'center', behavior: reduceMotion ? 'auto' : 'smooth' });
+        }
+      });
+    }
+    var capTicking = false;
+    function capTrack() {
+      capTicking = false;
+      // Current = the last block whose top has crossed the reading line.
+      var line = window.innerHeight * 0.4, best = capBlocks[0];
+      capBlocks.forEach(function (b) {
+        if (b.getBoundingClientRect().top <= line) best = b;
+      });
+      if (best) setCapCurrent(best.id);
+    }
+    window.addEventListener('scroll', function () {
+      if (!capTicking) { capTicking = true; requestAnimationFrame(capTrack); }
+    }, { passive: true });
+    capLinks.forEach(function (a) {
+      a.addEventListener('click', function (e) {
+        var target = document.getElementById(a.getAttribute('href').slice(1));
+        if (!target) return;
+        e.preventDefault();
+        target.scrollIntoView({ block: 'start', behavior: reduceMotion ? 'auto' : 'smooth' });
+        history.replaceState(null, '', '#' + target.id);
+        setCapCurrent(target.id);
+      });
+    });
+    capTrack();
+  }
+
   if (window.WAZEN_LIBYA && window.WAZEN_LIBYA.outline) {
     geo = { path: window.WAZEN_LIBYA.outline, pts: window.WAZEN_LIBYA.points };
     renderMap();
