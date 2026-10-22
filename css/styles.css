@@ -785,11 +785,18 @@ a:hover { color: var(--orange); }
 .co-hero h1 .em { color: var(--orange); }
 .co-hero-fg { justify-self: end; width: min(100%, 420px); }
 .co-hero-fg .ph { background: rgba(255,255,255,.06); color: rgba(255,255,255,.75); border-color: rgba(242,101,34,.8); }
+/* Real images, once the client's files replace the placeholders. */
+.co-hero-bg img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.co-hero-fg img { display: block; width: 100%; height: auto; }
+/* A cut-out figure: stand it on the hero's bottom edge instead of floating
+   above the inner padding. */
+.cap-hero .co-hero-fg { margin-bottom: -72px; }
 @media (max-width: 860px) {
   .co-hero { min-height: 60vh; }
   .co-hero-inner { grid-template-columns: 1fr; padding-top: 120px; padding-bottom: 48px; }
   .co-hero-fg { width: min(100%, 260px); justify-self: start; }
   .co-hero-bg { inset: 0; transform: none !important; } /* parallax off */
+  .cap-hero .co-hero-fg { margin-bottom: -48px; justify-self: end; }
 }
 
 /* Section header pattern used throughout this page. */
@@ -973,7 +980,6 @@ a:hover { color: var(--orange); }
 }
 .cap-index-list a:hover { color: var(--charcoal); background: rgba(242,101,34,.05); }
 .cap-index-list a[aria-current="true"] { color: var(--orange-dark); border-color: var(--orange); }
-.cap-num { font-size: 11.5px; letter-spacing: .12em; color: var(--orange); flex: 0 0 auto; }
 
 .cap-blocks { display: flex; flex-direction: column; }
 .cap-block {
@@ -981,8 +987,17 @@ a:hover { color: var(--orange); }
   scroll-margin-top: 96px;
 }
 .cap-block:first-child { border-top: 0; padding-top: 8px; }
-.cap-media { margin-bottom: 36px; }
-.cap-kicker { font-family: var(--font-head); font-weight: 700; font-size: 13px; letter-spacing: .2em; color: var(--orange); margin-bottom: 10px; }
+.cap-head {
+  display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  gap: 40px; align-items: center; margin-bottom: 28px;
+}
+.cap-head .cap-intro:last-child { margin-bottom: 0; }
+/* The client's photos are vignettes cropped to their subject; their soft
+   white edges melt into the section background. */
+.cap-media img {
+  display: block; width: 100%; height: auto; max-height: 300px;
+  object-fit: contain; mix-blend-mode: multiply;
+}
 .cap-block h3 {
   font-family: var(--font-head); font-weight: 600;
   font-size: clamp(26px, 2.6vw, 36px); line-height: 1.15;
@@ -1048,6 +1063,10 @@ a:hover { color: var(--orange); }
   .cap-index-list a[aria-current="true"] { border-color: var(--orange); color: var(--orange-dark); background: rgba(242,101,34,.08); }
   .cap-block { scroll-margin-top: 176px; padding: 40px 0 48px; }
   .cap-cols { grid-template-columns: 1fr; }
+  /* Photo above the title instead of beside it. */
+  .cap-head { grid-template-columns: minmax(0, 1fr); gap: 20px; }
+  .cap-media { order: -1; }
+  .cap-media img { max-height: 220px; }
 }
 @media (max-width: 640px) {
   .cap-list--2col { grid-template-columns: 1fr; }
@@ -1117,10 +1136,6 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible {
 }
 /* Anchored sections clear the sticky nav. */
 [id] { scroll-margin-top: 90px; }
-
-/* Capabilities blocks: a wider slot on desktop keeps the page from running
-   to 8,500px of placeholder; phones keep the taller 16:9. */
-@media (min-width: 961px) { .cap-media .ph--16x9 { aspect-ratio: 21 / 9; } }
 
 @media (max-width: 860px) {
   /* The overview tabs become one scrollable row of pills instead of a
