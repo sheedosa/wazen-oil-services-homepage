@@ -785,11 +785,18 @@ a:hover { color: var(--orange); }
 .co-hero h1 .em { color: var(--orange); }
 .co-hero-fg { justify-self: end; width: min(100%, 420px); }
 .co-hero-fg .ph { background: rgba(255,255,255,.06); color: rgba(255,255,255,.75); border-color: rgba(242,101,34,.8); }
+/* Real images, once the client's files replace the placeholders. */
+.co-hero-bg img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.co-hero-fg img { display: block; width: 100%; height: auto; }
+/* A cut-out figure: stand it on the hero's bottom edge instead of floating
+   above the inner padding. */
+.cap-hero .co-hero-fg { margin-bottom: -72px; }
 @media (max-width: 860px) {
   .co-hero { min-height: 60vh; }
   .co-hero-inner { grid-template-columns: 1fr; padding-top: 120px; padding-bottom: 48px; }
   .co-hero-fg { width: min(100%, 260px); justify-self: start; }
   .co-hero-bg { inset: 0; transform: none !important; } /* parallax off */
+  .cap-hero .co-hero-fg { margin-bottom: -48px; justify-self: end; }
 }
 
 /* Section header pattern used throughout this page. */
@@ -982,6 +989,10 @@ a:hover { color: var(--orange); }
 }
 .cap-block:first-child { border-top: 0; padding-top: 8px; }
 .cap-media { margin-bottom: 36px; }
+/* The client's photos are vignettes fading to white with the subject placed
+   anywhere in the frame, so show them uncropped and let the white melt into
+   the section background. */
+.cap-media img { display: block; width: 100%; height: auto; mix-blend-mode: multiply; }
 .cap-kicker { font-family: var(--font-head); font-weight: 700; font-size: 13px; letter-spacing: .2em; color: var(--orange); margin-bottom: 10px; }
 .cap-block h3 {
   font-family: var(--font-head); font-weight: 600;
