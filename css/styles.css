@@ -791,12 +791,15 @@ a:hover { color: var(--orange); }
 /* A cut-out figure: stand it on the hero's bottom edge instead of floating
    above the inner padding. */
 .cap-hero .co-hero-fg { margin-bottom: -72px; }
+/* The Company cut-out is two figures side by side, so it gets a wider slot. */
+.co-hero--company .co-hero-fg { width: min(100%, 600px); margin-bottom: -72px; }
 @media (max-width: 860px) {
   .co-hero { min-height: 60vh; }
   .co-hero-inner { grid-template-columns: 1fr; padding-top: 120px; padding-bottom: 48px; }
   .co-hero-fg { width: min(100%, 260px); justify-self: start; }
   .co-hero-bg { inset: 0; transform: none !important; } /* parallax off */
   .cap-hero .co-hero-fg { margin-bottom: -48px; justify-self: end; }
+  .co-hero--company .co-hero-fg { width: min(100%, 360px); margin-bottom: -48px; justify-self: end; }
 }
 
 /* Section header pattern used throughout this page. */
@@ -876,6 +879,7 @@ a:hover { color: var(--orange); }
   display: flex; align-items: flex-end; color: #fff;
 }
 .hse-card .ph { position: absolute; inset: 0; border-radius: 6px; }
+.hse-card > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .hse-card::after {
   content: ""; position: absolute; inset: 0;
   background: linear-gradient(180deg, rgba(15,16,20,.15) 0%, rgba(15,16,20,.85) 100%);
@@ -907,6 +911,9 @@ a:hover { color: var(--orange); }
   outline: 4px solid var(--orange); outline-offset: 4px; background: #fff;
 }
 .la-center .ph { position: absolute; inset: 0; border-radius: 6px; }
+/* The client supplied the collage as one finished composition. */
+.la-collage--image { display: block; }
+.la-collage--image img { display: block; width: 100%; height: auto; border-radius: 6px; }
 .la-copy h2 { font-size: clamp(26px, 2.6vw, 36px); }
 .la-copy p { font-size: 17px; line-height: 1.75; color: var(--muted); margin: 0 0 18px; }
 @media (max-width: 900px) { .la-grid { grid-template-columns: 1fr; } }
@@ -919,6 +926,7 @@ a:hover { color: var(--orange); }
 }
 .esg-card:hover { transform: translateY(-6px); box-shadow: 0 16px 36px rgba(27,28,32,.1); }
 .esg-card .ph { border-radius: 0; border-width: 0 0 2px; }
+.esg-card > img { display: block; width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: cover; }
 .esg-body { padding: 28px 30px 32px; display: flex; flex-direction: column; gap: 12px; }
 .esg-body .num { font-family: var(--font-head); font-weight: 700; font-size: 15px; color: var(--orange); letter-spacing: .06em; }
 .esg-body h3 { font-family: var(--font-head); font-weight: 600; font-size: 21px; margin: 0; color: var(--charcoal); }
