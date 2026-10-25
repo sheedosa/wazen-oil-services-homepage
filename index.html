@@ -63,7 +63,10 @@
 
 <main>
 <header id="top" class="hero">
-  <img class="hero-fallback-img" src="assets/hero-poster.jpg" alt="" aria-hidden="true" width="1920" height="800">
+  <picture>
+    <source media="(max-width: 860px)" srcset="assets/hero-mobile.jpg" width="1080" height="1440">
+    <img class="hero-fallback-img" src="assets/hero-poster.jpg" alt="" aria-hidden="true" width="1920" height="800" fetchpriority="high">
+  </picture>
   <video class="hero-video" data-hero-video muted loop playsinline preload="metadata" poster="assets/hero-poster.jpg" aria-hidden="true"></video>
   <div class="hero-scrim-v"></div>
   <div class="hero-scrim-h"></div>
@@ -275,16 +278,31 @@
 </section>
 
 <section id="careers" class="people">
-  <div class="wrap people-split">
-    <div class="people-copy" data-reveal>
-      <div class="eyebrow" style="color: var(--orange-light)">Our People &amp; Local Capability</div>
+  <!-- Layout follows the Home edits doc: a field of Wazen photos with the copy
+       card set inside it. Tiles are decorative; the grid collapses to a few
+       tiles plus the feature photo on tablet and phone. -->
+  <div class="people-grid">
+    <img class="pg-tile pg-top" src="assets/careers/sq-01.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async">
+    <img class="pg-tile pg-top" src="assets/careers/sq-03.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async">
+    <img class="pg-tile pg-top" src="assets/careers/wide-4.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async">
+    <img class="pg-tile pg-top" src="assets/careers/sq-07.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async">
+    <img class="pg-tile pg-top" src="assets/careers/sq-11.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async">
+    <img class="pg-tile pg-top" src="assets/careers/sq-20.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async">
+    <img class="pg-feature" src="assets/careers/main.jpg" alt="Wazen engineers on a scaffold at a tank construction site" width="1400" height="1119" loading="lazy" decoding="async">
+    <img class="pg-tile pg-mid-a" src="assets/careers/tall-2.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async">
+    <img class="pg-tile pg-mid-b" src="assets/careers/sq-06.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async">
+    <div class="pg-card" data-reveal>
+      <div class="eyebrow">Our People &amp; Local Capability</div>
       <h2>Building the Future of Libya's Energy Workforce</h2>
       <p>With a direct workforce of over 250 personnel, Wazen is deeply committed to local capacity building. Through HSE training programs, continuous professional development, and our Engineering Internship initiative, we work to empower local Libyan talent to build rewarding careers and execute alongside global leaders in the energy sector.</p>
       <a href="careers.html" class="btn btn-primary">Explore Career Opportunities</a>
     </div>
-    <div class="people-photo">
-      <img src="assets/home/people-worker.png" alt="Wazen field technician in a hard hat, safety glasses and company coveralls" width="514" height="513" loading="lazy" decoding="async">
-    </div>
+    <img class="pg-tile pg-bottom" src="assets/careers/sq-08.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async">
+    <img class="pg-tile pg-bottom" src="assets/careers/sq-13.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async">
+    <img class="pg-tile pg-bottom" src="assets/careers/wide-1.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async">
+    <img class="pg-tile pg-bottom" src="assets/careers/sq-16.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async">
+    <img class="pg-tile pg-bottom" src="assets/careers/sq-24.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async">
+    <img class="pg-tile pg-bottom" src="assets/careers/sq-23.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async">
   </div>
 </section>
 

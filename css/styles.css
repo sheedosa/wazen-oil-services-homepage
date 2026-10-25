@@ -1494,3 +1494,66 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible {
 /* Spacing the removed .rule used to provide */
 .section h2 + .lede, .section h2 + p, .co-head h2 + .lede, .co-head h2 + p,
 .footprint-copy h2 + .lede, .la-copy h2 + p, .gp-head-copy h2 + .lede { margin-top: 20px; }
+
+/* ---------- Home: People section, photo field per the Home edits doc ----------
+   12-column field on desktop; the copy card and the feature photo sit inside it.
+   Rows grow with the card so text is never clipped. */
+.people { background: var(--charcoal-2); }
+.people-grid {
+  display: grid; grid-template-columns: repeat(12, minmax(0, 1fr));
+  grid-auto-rows: minmax(128px, auto); gap: 8px; padding: 8px;
+}
+.people-grid img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.pg-top, .pg-bottom { grid-column: span 2; aspect-ratio: auto; }
+.pg-top { grid-row: 1; }
+.pg-bottom { grid-row: 5; }
+.pg-feature { grid-column: 1 / 6; grid-row: 2 / 5; }
+.pg-mid-a { grid-column: 6 / 8; grid-row: 2 / 4; }
+.pg-mid-b { grid-column: 6 / 8; grid-row: 4 / 5; }
+.pg-card {
+  grid-column: 8 / 13; grid-row: 2 / 5; background: #fff;
+  padding: clamp(32px, 3.4vw, 56px); display: flex; flex-direction: column; justify-content: center;
+}
+.pg-card h2 {
+  font-family: var(--font-head); font-weight: 700; font-size: clamp(30px, 2.9vw, 42px);
+  line-height: 1.05; color: var(--charcoal); margin: 0 0 18px;
+}
+.pg-card p { font-size: 17px; line-height: 1.7; color: var(--muted); margin: 0 0 28px; }
+.pg-card .btn { align-self: flex-start; }
+@media (max-width: 1100px) {
+  .people-grid { grid-template-columns: repeat(6, minmax(0, 1fr)); grid-auto-rows: auto; }
+  .pg-top, .pg-bottom { grid-row: auto; grid-column: span 2; aspect-ratio: 1 / 1; }
+  .pg-top:nth-child(n+4), .pg-bottom:nth-last-child(-n+3), .pg-mid-a, .pg-mid-b { display: none !important; }
+  .pg-feature { grid-column: 1 / -1; grid-row: auto; aspect-ratio: 16 / 9; }
+  .pg-card { grid-column: 1 / -1; grid-row: auto; }
+}
+@media (max-width: 640px) {
+  .people-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; padding: 6px; }
+  .pg-top, .pg-bottom { grid-column: span 1; }
+  .pg-top:nth-child(n+3), .pg-bottom { display: none !important; }
+  .pg-feature { aspect-ratio: 4 / 3; }
+  .pg-card { padding: 32px 22px 36px; }
+  .pg-card h2 { font-size: 30px; }
+  .pg-card p { font-size: 16px; }
+  .pg-card .btn { align-self: stretch; }
+}
+/* Tablet: one row of six small tiles instead of three stretched ones */
+@media (max-width: 1100px) and (min-width: 641px) {
+  .pg-top { grid-column: span 1; }
+  .pg-top:nth-child(n+4) { display: block !important; }
+  .pg-bottom { display: none !important; }
+}
+/* Phone: trust bar 2x2 without a stray indent on the second row */
+@media (max-width: 860px) {
+  .trust-item:nth-child(odd) { border-left: 0; padding-left: 0; }
+  .trust-item:nth-child(even) { padding-left: 16px; }
+}
+/* Tablet/phone footprint: copy, then filters and map, then the selected location */
+@media (max-width: 900px) {
+  .footprint-copy { display: contents; }
+  .footprint-copy > * { order: 1; }
+  .footprint-map { order: 2; }
+  .footprint-copy .map-detail { order: 3; margin-top: 8px; }
+  .map-filters { gap: 8px; }
+  .map-filters button { flex: 1 1 auto; justify-content: center; }
+}
