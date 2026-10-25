@@ -373,3 +373,21 @@
     renderMap();
   }
 })();
+
+/* Track Record: filter project cards by lifecycle stage. A link such as
+   track-record.html#build opens the page pre-filtered. */
+(function () {
+  var bar = document.querySelector('[data-project-filters]');
+  if (!bar) return;
+  var buttons = Array.prototype.slice.call(bar.querySelectorAll('[data-filter]'));
+  var cards = Array.prototype.slice.call(document.querySelectorAll('[data-project]'));
+  function apply(key) {
+    buttons.forEach(function (b) { b.setAttribute('aria-pressed', b.getAttribute('data-filter') === key ? 'true' : 'false'); });
+    cards.forEach(function (c) { c.hidden = !(key === 'all' || c.getAttribute('data-cat') === key); });
+  }
+  buttons.forEach(function (b) {
+    b.addEventListener('click', function () { apply(b.getAttribute('data-filter')); });
+  });
+  var hash = (location.hash || '').replace('#', '');
+  if (['build', 'integrate', 'operate'].indexOf(hash) !== -1) apply(hash);
+})();
