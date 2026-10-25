@@ -48,7 +48,9 @@
     heroVideo.muted = true;
     heroVideo.defaultMuted = true;
     var src = document.createElement('source');
-    src.src = 'assets/hero-video.mp4';
+    // Full HD only where the screen can show it; a lighter 1280px cut otherwise.
+    var px = window.innerWidth * (window.devicePixelRatio || 1);
+    src.src = px > 1600 ? 'assets/hero-video.mp4' : 'assets/hero-video-1280.mp4';
     src.type = 'video/mp4';
     heroVideo.appendChild(src);
     heroVideo.load();
