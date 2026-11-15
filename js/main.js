@@ -2,6 +2,14 @@
   'use strict';
 
   var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.documentElement.classList.add('js');
+
+  /* ---------- Images fade in as they arrive instead of popping in ---------- */
+  document.querySelectorAll('img[loading="lazy"]').forEach(function (img) {
+    function done() { img.classList.add('is-loaded'); }
+    if (img.complete && img.naturalWidth) done();
+    else { img.addEventListener('load', done, { once: true }); img.addEventListener('error', done, { once: true }); }
+  });
 
   /* ---------- Nav: solid on scroll + mobile menu ---------- */
   var nav = document.querySelector('[data-nav]');
@@ -12,10 +20,16 @@
   // scroll. Pages without a hero have no dark backdrop, so white nav text over
   // the translucent gradient would be unreadable — keep those solid always.
   var navAlwaysSolid = document.body.classList.contains('uc-page');
+  // Only touches the DOM when the state actually flips, once per frame at most.
+  var navSolid = null, navTicking = false;
   function setSolid() {
-    nav.classList.toggle('is-solid', navAlwaysSolid || window.scrollY > 40);
+    navTicking = false;
+    var solid = navAlwaysSolid || window.scrollY > 40;
+    if (solid !== navSolid) { navSolid = solid; nav.classList.toggle('is-solid', solid); }
   }
-  window.addEventListener('scroll', setSolid, { passive: true });
+  window.addEventListener('scroll', function () {
+    if (!navTicking) { navTicking = true; requestAnimationFrame(setSolid); }
+  }, { passive: true });
   setSolid();
 
   function closeMenu() {
@@ -78,7 +92,7 @@
           revealIO.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.12 });
+    }, { threshold: 0, rootMargin: '0px 0px -8% 0px' });
     document.querySelectorAll('[data-reveal]').forEach(function (el) {
       var r = el.getBoundingClientRect();
       if (r.top > window.innerHeight * 0.92) {
