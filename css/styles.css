@@ -1809,3 +1809,46 @@ html { scroll-behavior: auto; }
 .co-hero--careers .co-hero-text { max-width: min(44%, 540px); }
 @media (min-width: 861px) { .co-hero--careers .co-hero-fg { width: min(52%, 700px); } }
 @media (max-width: 860px) { .co-hero--careers .co-hero-text { max-width: none; } }
+
+/* ======================================================================
+   2.4 smoothness pass (Nov 2026): image fade-in, staggered grids, touch
+   ====================================================================== */
+html { -webkit-text-size-adjust: 100%; scroll-padding-top: calc(var(--nav-h) + 16px); }
+a, button, [role="tab"] { -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
+img { background-color: rgba(127, 127, 127, .08); }
+img[src$=".svg"], .client-chip img, .co-hero-fg img, .nav-brand img { background-color: transparent; }
+
+/* Lazy images fade up from the placeholder tone once loaded (JS only, so the
+   page never hides images when scripts fail). */
+.js img[loading="lazy"]:not(.is-loaded) { opacity: 0; }
+.js img[loading="lazy"] { transition: opacity .5s ease; }
+
+/* Grids reveal card by card rather than as one slab. */
+@media (prefers-reduced-motion: no-preference) {
+  .case-grid[data-reveal].pre-reveal, .gp-cols[data-reveal].pre-reveal, .hse-cards[data-reveal].pre-reveal,
+  .esg-grid[data-reveal].pre-reveal, .grid-6[data-reveal].pre-reveal, .news-grid[data-reveal].pre-reveal {
+    opacity: 1; transform: none;
+  }
+  .case-grid.pre-reveal > *, .gp-cols.pre-reveal > *, .hse-cards.pre-reveal > *,
+  .esg-grid.pre-reveal > *, .grid-6.pre-reveal > *, .news-grid.pre-reveal > * {
+    opacity: 0; transform: translateY(16px);
+    transition: opacity .6s cubic-bezier(.22,.61,.36,1), transform .6s cubic-bezier(.22,.61,.36,1);
+  }
+  .pre-reveal.in-view > * { opacity: 1; transform: none; }
+  .pre-reveal.in-view > :nth-child(2) { transition-delay: .08s; }
+  .pre-reveal.in-view > :nth-child(3) { transition-delay: .16s; }
+  .pre-reveal.in-view > :nth-child(4) { transition-delay: .24s; }
+  .pre-reveal.in-view > :nth-child(5) { transition-delay: .32s; }
+  .pre-reveal.in-view > :nth-child(6) { transition-delay: .4s; }
+  /* On phones grids stack, so each card reveals on its own and a stagger
+     would only add waiting. */
+  @media (max-width: 760px) { .pre-reveal.in-view > * { transition-delay: 0s !important; } }
+
+  /* Buttons give a small press response on touch. */
+  .btn:active { transform: scale(.98); }
+  .btn { transition: background-color .2s ease, border-color .2s ease, color .2s ease, transform .12s ease; }
+}
+
+/* Keep in-page jumps under the sticky bars. */
+[id] { scroll-margin-top: calc(var(--nav-h) + 16px); }
+.proj-section { scroll-margin-top: calc(var(--nav-h) + 72px); }
