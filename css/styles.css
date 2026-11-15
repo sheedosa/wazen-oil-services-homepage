@@ -1770,3 +1770,42 @@ html { scroll-behavior: auto; }
 }
 .case-fact { font-size: clamp(28px, 2.6vw, 38px); }
 .case-fact span { white-space: nowrap; }
+
+/* ======================================================================
+   2.3 client media (Nov 2026): page heroes, history and project photos
+   ====================================================================== */
+
+/* ---------- Projects / Careers / Contact heroes: background photo that
+   drifts on scroll, with a cut-out figure standing on the bottom edge ---------- */
+.co-hero .co-hero-fg img { display: block; width: 100%; height: auto; }
+.co-hero--page .co-hero-text { max-width: min(54%, 660px); }
+.co-hero--page h1 { font-size: clamp(36px, 4.6vw, 64px); max-width: 17ch; }
+.co-hero--projects .co-hero-fg, .co-hero--contact .co-hero-fg {
+  width: auto; height: min(84%, 470px); right: clamp(20px, 6vw, 96px);
+}
+.co-hero--projects .co-hero-fg img, .co-hero--contact .co-hero-fg img { height: 100%; width: auto; }
+.co-hero--careers .co-hero-fg { width: min(58%, 780px); right: clamp(0px, 2vw, 24px); }
+@media (max-width: 860px) {
+  .co-hero--projects .co-hero-fg, .co-hero--contact .co-hero-fg { width: auto; height: 260px; align-self: flex-end; margin-top: 12px; }
+  .co-hero--careers .co-hero-fg { width: 100%; }
+}
+
+/* ---------- History: photo beside each period ---------- */
+.hist-entry { max-width: none; display: grid; grid-template-columns: minmax(0, 1fr) minmax(220px, 330px); gap: 0 44px; align-items: start; }
+.hist-img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; margin-top: 4px; }
+@media (max-width: 760px) {
+  .hist-entry { display: block; }
+  .hist-img { margin-top: 22px; }
+}
+
+/* ---------- Project cards: photo on top; the second photo fades in on hover ---------- */
+.case { border-top: 0; padding-top: 0; grid-row: span 5; }
+.case-media { position: relative; aspect-ratio: 4 / 3; overflow: hidden; margin-bottom: 22px; background: var(--border-2); }
+.case-media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: opacity .45s ease; }
+.case-media img + img { opacity: 0; }
+@media (hover: hover) { .case:hover .case-media img + img { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .case-media img { transition: none; } }
+/* Careers: keep the headline clear of the team photo. */
+.co-hero--careers .co-hero-text { max-width: min(44%, 540px); }
+@media (min-width: 861px) { .co-hero--careers .co-hero-fg { width: min(52%, 700px); } }
+@media (max-width: 860px) { .co-hero--careers .co-hero-text { max-width: none; } }
