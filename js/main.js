@@ -227,7 +227,8 @@
   var filterBar = document.querySelector('[data-map-filters]');
   var mapPanel = document.querySelector('[data-map-panel]');
   var mapDetail = document.querySelector('[data-map-detail]');
-  var activeCat = 'hq';
+  // A page can open on another category, e.g. Projects opens on project sites.
+  var activeCat = (filterBar && filterBar.getAttribute('data-map-default')) || 'hq';
   var activeSite = 0;
   var geo = null; // { path, pts: [[x,y], ...] } — indexes align with SITES
 
@@ -322,6 +323,7 @@
     renderDetail();
   }
 
+  activeSite = indexesFor(activeCat)[0] || 0;
   renderFilters();
   renderDetail();
 
@@ -392,4 +394,59 @@
   });
   var hash = (location.hash || '').replace('#', '');
   if (['build', 'integrate', 'operate'].indexOf(hash) !== -1) apply(hash);
+})();
+
+/* Careers: vacancies live in Wazen's ERP. The panel links out by default and
+   becomes an inline frame when data-embed="on" (needs the ERP to allow this
+   site to frame it). */
+(function () {
+  var jobs = document.querySelector('[data-jobs]');
+  if (!jobs || jobs.getAttribute('data-embed') !== 'on') return;
+  var frame = document.createElement('iframe');
+  frame.className = 'jobs-frame';
+  frame.src = jobs.getAttribute('data-src');
+  frame.title = 'Current vacancies at Wazen';
+  frame.loading = 'lazy';
+  jobs.parentNode.replaceChild(frame, jobs);
+})();
+
+/* Contact form. With no data-endpoint the message is handed to the visitor's
+   email app; with one it is posted there and the result shown in place. */
+(function () {
+  var form = document.querySelector('[data-contact-form]');
+  if (!form) return;
+  var err = form.querySelector('[data-form-error]');
+  var note = form.querySelector('[data-form-note]');
+  function fail(msg, field) {
+    err.textContent = msg; err.hidden = false;
+    if (field) field.focus();
+  }
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var f = form.elements;
+    var name = f['name'].value.trim(), company = f['company'].value.trim();
+    var email = f['email'].value.trim(), message = f['message'].value.trim();
+    err.hidden = true;
+    if (!name) return fail('Enter your full name.', f['name']);
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return fail('Enter an email address we can reply to.', f['email']);
+    if (!message) return fail('Add a few details about your inquiry.', f['message']);
+    var endpoint = form.getAttribute('data-endpoint');
+    if (endpoint) {
+      var btn = form.querySelector('button[type="submit"]');
+      btn.disabled = true;
+      fetch(endpoint, { method: 'POST', headers: { 'Accept': 'application/json' }, body: new FormData(form) })
+        .then(function (r) {
+          if (!r.ok) throw new Error('send failed');
+          form.reset();
+          note.textContent = 'Inquiry sent. Our team will reply to ' + email + '.';
+        })
+        .catch(function () { fail('Your inquiry could not be sent. Email ' + form.getAttribute('data-to') + ' instead.'); })
+        .then(function () { btn.disabled = false; });
+      return;
+    }
+    var subject = 'Website inquiry from ' + name + (company ? ' (' + company + ')' : '');
+    var body = message + '\n\n' + name + (company ? '\n' + company : '') + '\n' + email;
+    location.href = 'mailto:' + form.getAttribute('data-to') +
+      '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+  });
 })();
