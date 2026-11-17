@@ -1813,7 +1813,7 @@ html { scroll-behavior: auto; }
 /* ======================================================================
    2.4 smoothness pass (Nov 2026): image fade-in, staggered grids, touch
    ====================================================================== */
-html { -webkit-text-size-adjust: 100%; scroll-padding-top: calc(var(--nav-h) + 16px); }
+html { -webkit-text-size-adjust: 100%; }
 a, button, [role="tab"] { -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
 img { background-color: rgba(127, 127, 127, .08); }
 img[src$=".svg"], .client-chip img, .co-hero-fg img, .nav-brand img { background-color: transparent; }
@@ -1852,3 +1852,71 @@ img[src$=".svg"], .client-chip img, .co-hero-fg img, .nav-brand img { background
 /* Keep in-page jumps under the sticky bars. */
 [id] { scroll-margin-top: calc(var(--nav-h) + 16px); }
 .proj-section { scroll-margin-top: calc(var(--nav-h) + 72px); }
+
+/* ======================================================================
+   2.5 inner-page heroes, one shared layout (Nov 2026)
+   Every inner page (Why Wazen, Capabilities, Global Partnerships, Projects,
+   Careers, Contact) uses the same banner: same height, same headline size,
+   text aligned to the page content edge, and the cut-out figure standing on
+   the bottom edge inside the same content width (not the screen edge).
+   Earlier per-page hero rules are superseded by these.
+   ====================================================================== */
+header.co-hero { display: block; position: relative; min-height: 620px; overflow: hidden; }
+header.co-hero .co-hero-inner {
+  position: relative; display: flex; align-items: center;
+  max-width: 1280px; min-height: 620px; margin: 0 auto;
+  padding: calc(var(--nav-h) + 40px) clamp(20px, 4vw, 56px) 56px;
+}
+header.co-hero .co-hero-text { position: relative; z-index: 2; width: 46%; max-width: 600px; }
+header.co-hero h1 {
+  font-size: clamp(38px, 4.1vw, 58px); line-height: 1.04; letter-spacing: -.005em;
+  max-width: 15ch; margin: 0; color: #fff; text-wrap: balance;
+}
+header.co-hero h1 .em { color: inherit; }
+header.co-hero .co-hero-intro { max-width: 54ch; margin-top: 20px; font-size: 16.5px; }
+
+/* Figure: a box on the right half of the content width, bottom-aligned.
+   Tall cut-outs are limited by the box height, wide ones by its width. */
+header.co-hero .co-hero-fg {
+  position: absolute; z-index: 1; margin: 0; pointer-events: none;
+  top: calc(var(--nav-h) + 28px); bottom: 0; right: clamp(20px, 4vw, 56px);
+  width: 48%; height: auto; display: flex; align-items: flex-end; justify-content: flex-end;
+}
+header.co-hero .co-hero-fg img {
+  width: auto; height: auto; max-width: 100%; max-height: 100%; object-fit: contain; object-position: right bottom;
+}
+header.co-hero .co-hero-fg--wide { width: 52%; }
+/* Careers: the team photo is a wide strip, so it runs along the bottom under
+   a top-aligned headline instead of squeezing into the right half. */
+header.co-hero--careers .co-hero-inner { align-items: flex-start; }
+header.co-hero--careers .co-hero-text { width: 60%; }
+header.co-hero--careers .co-hero-fg { width: auto; left: clamp(20px, 4vw, 56px); top: calc(var(--nav-h) + 220px); justify-content: center; }
+
+@media (max-width: 1100px) {
+  header.co-hero, header.co-hero .co-hero-inner { min-height: 540px; }
+  header.co-hero--careers .co-hero-fg { top: calc(var(--nav-h) + 190px); }
+}
+
+/* Phones and small tablets: headline first, then the figure on the bottom edge. */
+@media (max-width: 860px) {
+  header.co-hero, header.co-hero .co-hero-inner { min-height: 0; }
+  header.co-hero .co-hero-inner {
+    flex-direction: column; align-items: stretch;
+    padding: calc(var(--nav-h) + 32px) clamp(20px, 4vw, 56px) 0;
+  }
+  header.co-hero .co-hero-text, header.co-hero--careers .co-hero-text { width: auto; max-width: none; }
+  header.co-hero h1 { font-size: clamp(32px, 8.2vw, 46px); max-width: 16ch; }
+  header.co-hero .co-hero-intro { font-size: 15.5px; }
+  header.co-hero .co-hero-fg, header.co-hero--careers .co-hero-fg {
+    position: relative; inset: auto; width: 100%; height: 260px; margin-top: 24px;
+    justify-content: flex-end; align-items: flex-end;
+  }
+  header.co-hero .co-hero-fg--wide { height: auto; justify-content: center; }
+  header.co-hero .co-hero-fg--wide img { width: 100%; max-height: none; }
+}
+@media (max-width: 400px) { header.co-hero .co-hero-fg:not(.co-hero-fg--wide) { height: 220px; } }
+header.co-hero h1 { max-width: 18ch; }
+@media (max-width: 860px) { header.co-hero h1 { max-width: 20ch; } }
+/* Project sections: land with the section label just under the sticky bars
+   (the section's own 96px top padding would otherwise add a large gap). */
+.proj-section { scroll-margin-top: calc(var(--nav-h) + 4px); }
