@@ -1920,3 +1920,10 @@ header.co-hero h1 { max-width: 18ch; }
 /* Project sections: land with the section label just under the sticky bars
    (the section's own 96px top padding would otherwise add a large gap). */
 .proj-section { scroll-margin-top: calc(var(--nav-h) + 4px); }
+
+/* Touch comfort: text links in the homepage tab cards get a 44px tap area,
+   and map filter labels are a little larger on phones. */
+@media (hover: none), (max-width: 860px) {
+  #company .tab-card .link { display: inline-flex; align-items: center; min-height: 44px; padding-bottom: 0; }
+  .map-filters button { font-size: 13.5px; min-height: 44px; }
+}
