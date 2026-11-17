@@ -4,6 +4,22 @@
   var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   document.documentElement.classList.add('js');
 
+  /* Centre an item inside its own horizontally scrolling bar (year rail,
+     section index). Never uses scrollIntoView, which also scrolls the page
+     vertically and made pages jump on load on phones. */
+  function centerInRail(el, smooth) {
+    var rail = el.parentElement;
+    while (rail && rail !== document.body) {
+      var ox = getComputedStyle(rail).overflowX;
+      if ((ox === 'auto' || ox === 'scroll') && rail.scrollWidth > rail.clientWidth) break;
+      rail = rail.parentElement;
+    }
+    if (!rail || rail === document.body) return;
+    var r = rail.getBoundingClientRect(), e = el.getBoundingClientRect();
+    var left = rail.scrollLeft + (e.left - r.left) - (r.width - e.width) / 2;
+    rail.scrollTo({ left: Math.max(0, left), behavior: smooth && !reduceMotion ? 'smooth' : 'auto' });
+  }
+
   /* ---------- Images fade in as they arrive instead of popping in ---------- */
   document.querySelectorAll('img[loading="lazy"]').forEach(function (img) {
     function done() { img.classList.add('is-loaded'); }
@@ -143,9 +159,7 @@
         btn.setAttribute('aria-selected', on ? 'true' : 'false');
         btn.setAttribute('tabindex', on ? '0' : '-1');
         if (on && focus) btn.focus();
-        if (on && typeof btn.scrollIntoView === 'function' && window.innerWidth <= 960) {
-          btn.scrollIntoView({ block: 'nearest', inline: 'center', behavior: reduceMotion ? 'auto' : 'smooth' });
-        }
+        if (on && window.innerWidth <= 960) centerInRail(btn, true);
       });
       tlPanels.forEach(function (panel, idx) {
         if (idx === i) panel.setAttribute('data-active', ''); else panel.removeAttribute('data-active');
@@ -351,13 +365,15 @@
   if (capIndex) {
     var capLinks = Array.prototype.slice.call(capIndex.querySelectorAll('[data-cap-link]'));
     var capBlocks = Array.prototype.slice.call(document.querySelectorAll('[data-cap-block]'));
+    var capCurrentId = null;
     function setCapCurrent(id) {
+      if (id === capCurrentId) return;
+      var first = capCurrentId === null;
+      capCurrentId = id;
       capLinks.forEach(function (a) {
         var on = a.getAttribute('href') === '#' + id;
         if (on) { a.setAttribute('aria-current', 'true'); } else { a.removeAttribute('aria-current'); }
-        if (on && window.innerWidth <= 960) {
-          a.scrollIntoView({ block: 'nearest', inline: 'center', behavior: reduceMotion ? 'auto' : 'smooth' });
-        }
+        if (on && window.innerWidth <= 960) centerInRail(a, !first);
       });
     }
     var capTicking = false;
