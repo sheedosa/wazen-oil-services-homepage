@@ -2020,3 +2020,51 @@ h3.cap-sub { font-size: 17px; font-weight: 700; margin: 6px 0 14px; }
     margin-right: calc(-1 * clamp(20px, 4vw, 56px));
   }
 }
+
+/* ======================================================================
+   2.8 client final edits (Nov 2026)
+   ====================================================================== */
+
+/* Revealed blocks return to their exact place. A later rule was leaving every
+   revealed block 14px low, which is why the white card on the homepage sat
+   below the top of the photo beside it. */
+[data-reveal].pre-reveal.in-view { opacity: 1; transform: none; }
+
+/* Homepage photo collage: rows are sized by the card, never by the photos
+   (the width/height attributes were stretching the rows on wide screens). */
+@media (min-width: 1101px) { .people-grid img { aspect-ratio: auto; } }
+
+/* "Trusted by..." uses the same heading style as "Developing Libya's Energy
+   Workforce". */
+.home .clients h2 {
+  font-family: var(--font-head); font-weight: 700; line-height: 1.08; letter-spacing: 0;
+  font-size: 30px; color: var(--charcoal); text-wrap: balance;
+}
+@media (min-width: 761px) { .home .clients h2 { font-size: clamp(28px, 2.6vw, 38px); } }
+@media (min-width: 961px) { .home .clients h2 { font-size: clamp(28px, 2.7vw, 38px); font-weight: 700; } }
+.home .clients .marquee-mask { margin-top: 28px; }
+
+/* Company hero: headline at the homepage hero size, on two lines, with the
+   intro running wider beneath it. The two figures stand below the text. */
+@media (min-width: 961px) {
+  header.co-hero--company, header.co-hero--company .co-hero-inner { min-height: 700px; }
+  header.co-hero--company .co-hero-inner { align-items: flex-start; padding-top: calc(var(--nav-h) + 56px); }
+  header.co-hero--company .co-hero-text { width: auto; max-width: none; }
+  header.co-hero--company h1 { font-size: clamp(42px, 5.6vw, 76px); line-height: 1.02; max-width: 13.2em; }
+  header.co-hero--company .co-hero-intro { max-width: 760px; font-size: 17px; margin-top: 24px; }
+  header.co-hero--company .co-hero-fg { top: auto; height: 272px; width: min(44vw, 620px); }
+}
+
+/* Global Partnerships: trust strip heading centred at section-title size,
+   supporting line regular weight. */
+.gp-trust .clients-inner { text-align: center; }
+.gp-trust-title {
+  font-family: var(--font-head); font-weight: 700; letter-spacing: -.005em; line-height: 1.08;
+  font-size: 30px; color: var(--charcoal); margin: 0 0 12px; text-wrap: balance;
+}
+.gp-trust-sub { font-size: 16px; font-weight: 400; line-height: 1.55; color: var(--muted); margin: 0 auto; max-width: 80ch; }
+@media (min-width: 961px) {
+  .gp-trust-title { font-size: clamp(30px, 3.05vw, 44px); }
+  .gp-trust-sub { font-size: 18px; }
+  .gp-trust .clients-inner { padding-top: 64px; padding-bottom: 56px; }
+}
