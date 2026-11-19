@@ -1987,3 +1987,36 @@ h3.cap-sub { font-size: 17px; font-weight: 700; margin: 6px 0 14px; }
   .cap-media { order: -1; min-height: 0; }
   .cap-media img { position: static; height: auto; aspect-ratio: 16 / 8; }
 }
+
+/* ======================================================================
+   2.7 hero figures anchored to the screen's right edge (Nov 2026)
+   The cut-outs are photographed figures, some cropped on their right side
+   (Contact's arm). Placed inside the content width, that cut edge floated in
+   mid-screen on wide monitors and looked like a mistake. They now stand on
+   the bottom edge and sit flush against the right edge of the screen.
+   ====================================================================== */
+@media (min-width: 861px) {
+  header.co-hero .co-hero-inner { position: static; }
+  header.co-hero .co-hero-fg {
+    right: 0; width: min(46vw, 760px);
+    top: calc(var(--nav-h) + 24px); bottom: 0;
+  }
+  header.co-hero .co-hero-fg img { object-position: right bottom; }
+  header.co-hero .co-hero-fg--wide { width: min(52vw, 900px); }
+  /* Careers: the team strip still runs along the bottom under the headline,
+     now reaching the right edge of the screen. */
+  header.co-hero--careers .co-hero-fg {
+    left: auto; right: 0; width: min(78vw, 1240px);
+    top: calc(var(--nav-h) + 220px); justify-content: flex-end;
+  }
+}
+@media (min-width: 861px) and (max-width: 1100px) {
+  header.co-hero--careers .co-hero-fg { top: calc(var(--nav-h) + 190px); width: 92vw; }
+}
+/* Phones: the figure runs to the right edge of the screen, not the text margin. */
+@media (max-width: 860px) {
+  header.co-hero .co-hero-fg:not(.co-hero-fg--wide) {
+    width: calc(100% + clamp(20px, 4vw, 56px));
+    margin-right: calc(-1 * clamp(20px, 4vw, 56px));
+  }
+}
