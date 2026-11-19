@@ -72,15 +72,27 @@
   var frugalNetwork = !!conn && (conn.saveData === true ||
     /(^|-)(slow-)?2g$|^3g$/.test(conn.effectiveType || ''));
   var heroVideo = document.querySelector('[data-hero-video]');
-  var wantsVideo = !reduceMotion && !frugalNetwork &&
-    !(window.matchMedia && window.matchMedia('(max-width: 860px)').matches);
+  // The video plays on every screen size. Phones held upright get a portrait
+  // cut that keeps each shot's subject in frame (the wide film would be cropped
+  // to a thin centre strip). It is skipped only for reduced motion, data saver
+  // or a very slow connection, where the still image stays.
+  var wantsVideo = !reduceMotion && !frugalNetwork;
   if (heroVideo && wantsVideo) {
     heroVideo.muted = true;
     heroVideo.defaultMuted = true;
+    heroVideo.setAttribute('muted', '');
+    heroVideo.setAttribute('playsinline', '');
+    var portraitPhone = window.matchMedia &&
+      window.matchMedia('(max-width: 860px) and (orientation: portrait)').matches;
     var src = document.createElement('source');
-    // Full HD only where the screen can show it; a lighter 1280px cut otherwise.
     var px = window.innerWidth * (window.devicePixelRatio || 1);
-    src.src = px > 1600 ? 'assets/hero-video.mp4' : 'assets/hero-video-1280.mp4';
+    if (portraitPhone) {
+      src.src = 'assets/hero-video-mobile.mp4';
+      heroVideo.poster = 'assets/hero-mobile.jpg';
+    } else {
+      // Full HD only where the screen can show it; a lighter 1280px cut otherwise.
+      src.src = px > 1600 && window.innerWidth > 860 ? 'assets/hero-video.mp4' : 'assets/hero-video-1280.mp4';
+    }
     src.type = 'video/mp4';
     heroVideo.appendChild(src);
     heroVideo.load();
@@ -93,10 +105,15 @@
         heroVideo.classList.add('is-playing');
       }
     };
-    heroVideo.addEventListener('canplay', tryPlay, { once: true });
+    if (heroVideo.readyState >= 3) tryPlay();
+    else heroVideo.addEventListener('canplay', tryPlay, { once: true });
     heroVideo.addEventListener('pause', function () {
-      if (heroVideo.isConnected) setTimeout(function () { if (heroVideo.paused) tryPlay(); }, 300);
+      if (heroVideo.isConnected && !document.hidden) setTimeout(function () { if (heroVideo.paused) tryPlay(); }, 300);
     });
+    // Phones can refuse autoplay (for example in Low Power Mode) until the first
+    // touch, and pause video when the tab is in the background.
+    document.addEventListener('touchstart', function () { if (heroVideo.paused) tryPlay(); }, { once: true, passive: true });
+    document.addEventListener('visibilitychange', function () { if (!document.hidden && heroVideo.paused) tryPlay(); });
   }
 
   /* ---------- Scroll reveal ---------- */
