@@ -258,7 +258,7 @@
     { cat: 'site', name: 'Mellitah',         d: 'Measurement and automation works at the Mellitah complex, including the integration of international metering systems through local execution.' },
     { cat: 'site', name: 'Tobruk',           d: 'Export-terminal support at Marsa el-Harige near Tobruk, at Libya\u2019s eastern gateway.' },
     { cat: 'site', name: 'Dahra',            d: 'Maintenance and production-support works at the Dahra Oilfield in central Libya.' },
-    { cat: 'site', name: 'Ras Lanuf',        d: 'Works at the Ras Lanuf refinery and petrochemical complex — turnaround support, fabrication and coastal logistics.' },
+    { cat: 'site', name: 'Ras Lanuf',        d: 'Storage tank inspection, repair and replacement at the Ras Lanuf tank farm and terminal for Harouge Oil Operations.' },
     { cat: 'site', name: 'Nafoora',          d: 'Operations and maintenance support at the Nafoora Oilfield in the eastern Sirte Basin.' },
     { cat: 'site', name: 'Zelten',           d: 'Field works at the Zelten (Nasser) Oilfield, one of the Sirte Basin\u2019s long-established producing areas.' }
   ];
