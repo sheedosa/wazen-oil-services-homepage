@@ -1927,3 +1927,63 @@ header.co-hero h1 { max-width: 18ch; }
   #company .tab-card .link { display: inline-flex; align-items: center; min-height: 44px; padding-bottom: 0; }
   .map-filters button { font-size: 13.5px; min-height: 44px; }
 }
+
+/* ======================================================================
+   2.6 desktop structure pass (Nov 2026): heading hierarchy, section
+   rhythm, capability photos
+   ====================================================================== */
+
+/* ---------- Capability titles are H2s (the page went H1 -> H3 before) ---------- */
+.cap-title {
+  font-family: var(--font-head); font-weight: 700; letter-spacing: -.005em;
+  font-size: clamp(27px, 2.7vw, 38px); line-height: 1.08;
+  margin: 0 0 18px; color: var(--charcoal); text-wrap: balance;
+}
+h3.cap-sub { font-size: 17px; font-weight: 700; margin: 6px 0 14px; }
+
+@media (min-width: 961px) {
+  /* ---------- Capabilities: photo is half the block and as tall as its text,
+     so its top lines up with the title and its bottom with the last line ---------- */
+  .cap-grid { grid-template-columns: minmax(200px, 236px) minmax(0, 1fr); column-gap: 56px; }
+  .cap-block:first-child { padding-top: 0; }
+  .cap-head { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 48px; align-items: stretch; margin-bottom: 36px; }
+  .cap-head-text { align-self: center; }
+  .cap-media { position: relative; min-height: 320px; }
+  .cap-media img {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    object-fit: cover; aspect-ratio: auto; max-height: none;
+  }
+
+  /* ---------- One type scale. Clear steps between levels:
+     page title 64 / section title 44 / block title 38 / card title 23 ---------- */
+  header.co-hero h1 { font-size: clamp(40px, 4.45vw, 64px); line-height: 1.03; max-width: 17ch; }
+  header.co-hero .co-hero-text { width: 50%; max-width: 640px; }
+  .section h2, .co-head h2, .gp-section h2, .footprint-copy h2, .la-copy h2,
+  #company .tab-intro h3, .cta h2 {
+    font-size: clamp(30px, 3.05vw, 44px); line-height: 1.08;
+  }
+  .section h2.cap-title { font-size: clamp(27px, 2.7vw, 38px); }
+  .pg-card h2, .contact-box h2 { font-size: clamp(28px, 2.7vw, 38px); line-height: 1.08; }
+  .hist-entry h3 { font-size: clamp(24px, 2.1vw, 30px); }
+  .gp-col h3, .esg-card h3, .case h3, #company .tab-card h3, .cards .card h3, .jobs-panel h3 {
+    font-size: 23px; font-weight: 700; line-height: 1.2;
+  }
+  .home .clients h2, .gp-trust-h { font-weight: 600; }
+
+  /* ---------- Section rhythm: every full section breathes the same 96px ---------- */
+  #footprint { padding: 96px 0; }
+  .cta-inner, .contact-band-inner { padding-top: 96px; padding-bottom: 96px; }
+  .cap-console { padding-top: 96px; }
+  .co-head, .section-head { margin-bottom: 0; }
+}
+@media (min-width: 961px) {
+  header.co-hero h1 { max-width: 20ch; }
+  header.co-hero--company .co-hero-text { width: 46%; }
+}
+/* Narrow laptops: not enough room for a half-width photo beside the text,
+   so the photo sits above it as a wide banner. */
+@media (min-width: 961px) and (max-width: 1180px) {
+  .cap-head { grid-template-columns: minmax(0, 1fr); gap: 24px; }
+  .cap-media { order: -1; min-height: 0; }
+  .cap-media img { position: static; height: auto; aspect-ratio: 16 / 8; }
+}
