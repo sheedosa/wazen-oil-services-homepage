@@ -2223,3 +2223,62 @@ h3.cap-sub { font-size: 17px; font-weight: 700; margin: 6px 0 14px; }
 }
 @keyframes wzFadeIn { from { opacity: 0; } to { opacity: 1; } }
 @media (min-width: 1101px) { #footprint .footprint-copy > h2 { max-width: none; text-wrap: balance; } }
+
+/* ======================================================================
+   3.1 page heroes: one title scale, clear structure (Nov 2026)
+   Measured before: inner titles 64px in a half-width column (3-4 ragged
+   lines, "Libya." alone on Projects), Company 76px, so the scale differed
+   page to page. Phones: inner titles 32px against 42px on the homepage,
+   with nothing saying which page you are on.
+   Now: every page title uses the homepage scale. On desktop it sits on a
+   shared baseline near the foot of the hero and runs slightly over the
+   photo, with a soft shadow to keep it readable. A short page name above
+   the title gives orientation (GOV.UK heading caption pattern).
+   ====================================================================== */
+.co-hero-label {
+  margin: 0 0 14px; font-family: var(--font-head); font-weight: 600;
+  font-size: 15px; line-height: 1.2; letter-spacing: .01em; color: var(--orange-light);
+}
+header.co-hero h1 { text-shadow: 0 2px 28px rgba(10,12,15,.45); }
+header.co-hero .co-hero-intro { text-shadow: 0 1px 16px rgba(10,12,15,.5); }
+
+@media (min-width: 861px) {
+  header.co-hero h1 { font-size: clamp(44px, 5.3vw, 80px); line-height: 1.0; letter-spacing: -.01em; }
+  .co-hero-label { font-size: 16px; margin-bottom: 18px; }
+  /* Pages with a single figure: title on the lower baseline, over the photo edge. */
+  header.co-hero:not(.co-hero--company):not(.co-hero--careers),
+  header.co-hero:not(.co-hero--company):not(.co-hero--careers) .co-hero-inner { min-height: clamp(560px, 50vw, 700px); }
+  header.co-hero:not(.co-hero--company):not(.co-hero--careers) .co-hero-inner {
+    align-items: flex-end; padding-bottom: clamp(56px, 6.5vw, 100px);
+  }
+  header.co-hero:not(.co-hero--company):not(.co-hero--careers) .co-hero-text { width: 74%; max-width: 980px; }
+  header.co-hero:not(.co-hero--company):not(.co-hero--careers) h1 { max-width: 22ch; }
+  /* Careers: title on top, team strip below it, same scale. */
+  header.co-hero--careers .co-hero-text { width: 70%; max-width: 980px; }
+  header.co-hero--careers h1 { max-width: 22ch; }
+  header.co-hero--company h1 { font-size: clamp(44px, 5.3vw, 80px); }
+  /* Left-side shade so the title reads where it crosses the photo. */
+  header.co-hero .co-hero-scrim {
+    background:
+      linear-gradient(90deg, rgba(14,17,21,.78) 0%, rgba(14,17,21,.5) 45%, rgba(14,17,21,.12) 75%, rgba(14,17,21,0) 100%),
+      linear-gradient(0deg, rgba(14,17,21,.55) 0%, rgba(14,17,21,0) 45%),
+      linear-gradient(180deg, rgba(14,17,21,.55) 0%, rgba(14,17,21,0) 22%);
+  }
+}
+@media (min-width: 861px) and (max-width: 1100px) {
+  header.co-hero--careers .co-hero-fg { top: calc(var(--nav-h) + 230px); }
+}
+
+/* Phones and small tablets: page name, title at homepage size, then the figure. */
+@media (max-width: 860px) {
+  header.co-hero h1 { font-size: clamp(36px, 10.4vw, 52px); line-height: 1.02; letter-spacing: -.005em; max-width: none; }
+  header.co-hero .co-hero-inner { padding-top: calc(var(--nav-h) + 24px); }
+  header.co-hero .co-hero-intro { font-size: 16px; line-height: 1.6; margin-top: 18px; }
+  header.co-hero .co-hero-fg:not(.co-hero-fg--wide) { height: 290px; margin-top: 8px; }
+  header.co-hero .co-hero-scrim { background: linear-gradient(180deg, rgba(14,17,21,.72) 0%, rgba(14,17,21,.55) 45%, rgba(14,17,21,.3) 100%); }
+}
+@media (max-width: 400px) { header.co-hero .co-hero-fg:not(.co-hero-fg--wide) { height: 260px; } }
+@media (min-width: 861px) { .co-hero-label { font-size: 18px; margin-bottom: 20px; } }
+/* Capabilities on phones: the white index bar meets the hero directly
+   (a 40px strip of page grey sat between them). */
+@media (max-width: 960px) { .cap-console { padding-top: 0; } }
