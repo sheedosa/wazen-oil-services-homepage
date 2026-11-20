@@ -2068,3 +2068,6 @@ h3.cap-sub { font-size: 17px; font-weight: 700; margin: 6px 0 14px; }
   .gp-trust-sub { font-size: 18px; }
   .gp-trust .clients-inner { padding-top: 64px; padding-bottom: 56px; }
 }
+
+/* History entries without a photo use the full width of the text column. */
+.hist-entry--text { grid-template-columns: minmax(0, 1fr); max-width: 74ch; }
