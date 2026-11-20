@@ -2113,3 +2113,113 @@ h3.cap-sub { font-size: 17px; font-weight: 700; margin: 6px 0 14px; }
     border-radius: 4px; box-shadow: 0 18px 36px -18px rgba(20, 21, 25, .35);
   }
 }
+
+/* ======================================================================
+   3.0 motion, hierarchy and layout pass (Nov 2026)
+   Motion here always answers something the reader did (scrolled to a
+   section, chose a tab, picked a map location) and is switched off for
+   visitors who ask for reduced motion (WCAG 2.2, 2.3.3).
+   ====================================================================== */
+
+/* ---------- Readable measure: body copy stays near 45-75 characters a line.
+   The tab intro ran to about 88. ---------- */
+#company .tab-intro { max-width: none; }
+#company .tab-intro p { max-width: 66ch; }
+.footprint-copy .lede, .co-head .lede { max-width: 68ch; }
+
+/* ---------- Homepage tabs ---------- */
+#company .tabbar.has-ink { position: relative; }
+#company .tabbar.has-ink button.is-active { border-bottom-color: transparent; }
+.tab-ink {
+  position: absolute; left: 0; bottom: 0; height: 2px; width: 0; background: var(--orange);
+  pointer-events: none;
+}
+#company .tab-card h3 { margin-top: 2px; }
+#company .tab-card p { color: rgba(255,255,255,.78); }
+
+/* ---------- Map: clearer labels ---------- */
+.map-detail .cat { font-size: 14px; letter-spacing: .01em; text-transform: none; }
+.map-detail h3 { font-size: 22px; font-weight: 700; line-height: 1.25; margin-top: 4px; }
+.map-detail p { font-size: 16px; line-height: 1.65; }
+.map-filters button { font-size: 13.5px; }
+
+/* ---------- Footprint on desktop: heading and intro run full width on top
+   (the heading was squeezed into three lines), then the selected location
+   beside a larger map. ---------- */
+@media (min-width: 1101px) {
+  .footprint-grid { grid-template-columns: minmax(280px, 4fr) minmax(0, 8fr); column-gap: 56px; row-gap: 0; align-items: start; }
+  .footprint-copy { display: contents; }
+  .footprint-copy > .eyebrow, .footprint-copy > h2, .footprint-copy > .lede { grid-column: 1 / -1; }
+  .footprint-copy > h2 { max-width: none; margin-bottom: 14px; }
+  .footprint-copy > .lede { margin-bottom: 44px; }
+  .footprint-copy > .map-detail { grid-column: 1; grid-row: 4; margin: 62px 0 0; position: sticky; top: calc(var(--nav-h) + 24px); }
+  .footprint-map { grid-column: 2; grid-row: 4; }
+}
+
+/* ---------- Company history rail: a track that fills with progress ---------- */
+@media (min-width: 961px) {
+  .hist-rail .cap-index-list { position: relative; }
+  .hist-rail .cap-index-list::before, .hist-rail .cap-index-list::after {
+    content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 2px; background: var(--border-2);
+  }
+  .hist-rail .cap-index-list::after {
+    background: var(--orange); transform-origin: top; transform: scaleY(var(--p, 0));
+  }
+  .hist-rail .cap-index-list a { border-left-color: transparent; padding-left: 18px; }
+  .hist-rail .cap-index-list a[aria-current="true"] { border-left-color: transparent; color: var(--charcoal); }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .tab-ink { transition: transform .4s cubic-bezier(.22,.61,.36,1), width .4s cubic-bezier(.22,.61,.36,1); }
+  .hist-rail .cap-index-list::after { transition: transform .15s linear; }
+  .hist-rail .cap-index-list a { transition: color .25s ease; }
+
+  /* Choosing a tab: the heading, intro and cards arrive in reading order. */
+  #company .tab-panel.is-active { animation: none; }
+  #company .tab-panel.is-active .tab-intro > *, #company .tab-panel.is-active .tab-card {
+    animation: wzRise .55s cubic-bezier(.22,.61,.36,1) both;
+  }
+  #company .tab-panel.is-active .tab-intro > :nth-child(2) { animation-delay: .06s; }
+  #company .tab-panel.is-active .tab-card:nth-child(1) { animation-delay: .12s; }
+  #company .tab-panel.is-active .tab-card:nth-child(2) { animation-delay: .19s; }
+  #company .tab-panel.is-active .tab-card:nth-child(3) { animation-delay: .26s; }
+
+  /* Picking a map location or filter: the detail and pins fade to the new state. */
+  .map-detail > * { animation: wzFadeIn .35s ease both; }
+  .map-detail > :nth-child(2) { animation-delay: .04s; }
+  .map-detail > :nth-child(3) { animation-delay: .08s; }
+  .map-pin { animation: wzFadeIn .45s ease both; }
+  .map-pin:nth-of-type(2) { animation-delay: .05s; } .map-pin:nth-of-type(3) { animation-delay: .1s; }
+  .map-pin:nth-of-type(4) { animation-delay: .15s; } .map-pin:nth-of-type(5) { animation-delay: .2s; }
+  .map-pin:nth-of-type(6) { animation-delay: .25s; }
+
+  /* Section headings: label, title, intro arrive one after another. */
+  .co-head[data-reveal].pre-reveal, .gp-head-copy[data-reveal].pre-reveal, .section-head[data-reveal].pre-reveal { opacity: 1; transform: none; }
+  .co-head.pre-reveal > *, .section-head.pre-reveal > * {
+    opacity: 0; transform: translateY(16px);
+    transition: opacity .6s cubic-bezier(.22,.61,.36,1), transform .6s cubic-bezier(.22,.61,.36,1);
+  }
+  .co-head.pre-reveal > :nth-child(2), .section-head.pre-reveal > :nth-child(2) { transition-delay: .08s; }
+  .co-head.pre-reveal > :nth-child(3), .section-head.pre-reveal > :nth-child(3) { transition-delay: .16s; }
+  .co-head.pre-reveal > :nth-child(n+4), .section-head.pre-reveal > :nth-child(n+4) { transition-delay: .24s; }
+  .co-head.pre-reveal.in-view > *, .section-head.pre-reveal.in-view > * { opacity: 1; transform: none; }
+
+  /* History periods: the text settles first, the photo follows and scales in. */
+  .hist-entry[data-reveal].pre-reveal { opacity: 1; transform: none; }
+  .hist-entry.pre-reveal .hist-copy, .hist-entry.pre-reveal .hist-img {
+    opacity: 0; transition: opacity .7s cubic-bezier(.22,.61,.36,1), transform .9s cubic-bezier(.22,.61,.36,1);
+  }
+  .hist-entry.pre-reveal .hist-copy { transform: translateY(18px); }
+  .hist-entry.pre-reveal .hist-img { transform: translateY(28px) scale(.97); transition-delay: .12s; }
+  .hist-entry.pre-reveal.in-view .hist-copy, .hist-entry.pre-reveal.in-view .hist-img { opacity: 1; transform: none; }
+
+  /* Photos respond to the pointer on desktop. */
+  @media (hover: hover) {
+    .case-media img, .cap-media img, .hist-img { transition: opacity .45s ease, transform .7s cubic-bezier(.22,.61,.36,1); }
+    .case:hover .case-media img { transform: scale(1.04); }
+    .hist-entry:hover .hist-img, .hist-entry.pre-reveal.in-view:hover .hist-img { transform: scale(1.015); }
+    .nav-links a { transition: color .2s ease, opacity .2s ease; }
+  }
+}
+@keyframes wzFadeIn { from { opacity: 0; } to { opacity: 1; } }
+@media (min-width: 1101px) { #footprint .footprint-copy > h2 { max-width: none; text-wrap: balance; } }

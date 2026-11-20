@@ -497,3 +497,47 @@
       '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
   });
 })();
+
+/* ---------- Motion pass (Nov 2026) ---------- */
+(function () {
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* Homepage tabs: one underline that slides to the selected tab, so the
+     change of section is visible as a movement rather than a swap. */
+  var bar = document.querySelector('#company [data-tabbar]');
+  if (bar) {
+    var ink = document.createElement('span');
+    ink.className = 'tab-ink'; ink.setAttribute('aria-hidden', 'true');
+    bar.appendChild(ink); bar.classList.add('has-ink');
+    var moveInk = function () {
+      var on = bar.querySelector('[data-tab].is-active');
+      if (!on) return;
+      ink.style.width = on.offsetWidth + 'px';
+      ink.style.transform = 'translateX(' + on.offsetLeft + 'px)';
+    };
+    new MutationObserver(moveInk).observe(bar, { attributes: true, subtree: true, attributeFilter: ['class'] });
+    window.addEventListener('resize', moveInk);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(moveInk);
+    moveInk();
+  }
+
+  /* Company history: the year rail fills as the reader moves through the
+     periods, showing how far through the story they are. */
+  var rail = document.querySelector('.hist-rail');
+  var entries = rail ? document.querySelectorAll('.hist-entry') : [];
+  if (rail && entries.length) {
+    var ticking = false;
+    var track = function () {
+      ticking = false;
+      var top = entries[0].getBoundingClientRect().top;
+      var bottom = entries[entries.length - 1].getBoundingClientRect().bottom;
+      var line = window.innerHeight * 0.4;
+      var p = (line - top) / Math.max(1, bottom - top);
+      rail.style.setProperty('--p', Math.max(0, Math.min(1, p)).toFixed(4));
+    };
+    window.addEventListener('scroll', function () {
+      if (!ticking) { ticking = true; requestAnimationFrame(track); }
+    }, { passive: true });
+    track();
+  }
+})();
